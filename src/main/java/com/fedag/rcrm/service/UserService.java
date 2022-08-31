@@ -1,4 +1,4 @@
 package com.fedag.rcrm.service;
 
-public class Service {
+public interface UserService {
 }

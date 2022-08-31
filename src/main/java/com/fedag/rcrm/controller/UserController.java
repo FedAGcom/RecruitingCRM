@@ -1,4 +1,4 @@
 package com.fedag.rcrm.controller;
 
-public class Controller {
+public interface UserController {
 }
