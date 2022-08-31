@@ -1,6 +1,8 @@
 package com.fedag.rcrm.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
@@ -9,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @MappedSuperclass
@@ -23,14 +27,5 @@ public abstract class User {
 
     @Column(name = "last_name")
     private String lastName;
-
-    public User() {
-    }
-
-    public User(long id, String firstName, String lastName) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
 
 }

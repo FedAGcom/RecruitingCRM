@@ -1,6 +1,10 @@
 package com.fedag.rcrm.model;
 
 import com.fedag.rcrm.enums.Role;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +13,10 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Set;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table
 public class HR extends Employee {
@@ -21,41 +29,6 @@ public class HR extends Employee {
 
     @Column
     private LocalDateTime created;
-
-    public HR() {
-        super();
-    }
-
-    public HR(long id, String firstName, String lastName, char[] password, Set<Role> roles, LocalDateTime created) {
-        super(id, firstName, lastName);
-        this.password = password;
-        this.roles = roles;
-        this.created = created;
-    }
-
-    public char[] getPassword() {
-        return password;
-    }
-
-    public void setPassword(char[] password) {
-        this.password = password;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
-    }
 
     @Override
     public String toString() {

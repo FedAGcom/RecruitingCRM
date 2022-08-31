@@ -10,5 +10,5 @@ CREATE TABLE candidate (
     position varchar(256) NOT NULL,
     salary numeric NOT NULL,
     created timestamp NOT NULL,
-    cv varchar(256)NOT NULL,
+    cv varchar(256)NOT NULL
 );
