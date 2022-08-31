@@ -25,17 +25,17 @@ public class HR extends Employee {
     private char[] password;
 
     //todo
-    private Set<Role> roles;
+   // private Set<Role> roles;
 
     @Column
     private LocalDateTime created;
 
-    @Override
+    /*@Override
     public String toString() {
         return "HR{" +
                 "password=" + Arrays.toString(password) +
                 ", roles=" + roles +
                 ", created=" + created +
                 '}';
-    }
+    }*/
 }

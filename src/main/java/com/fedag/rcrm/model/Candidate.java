@@ -8,19 +8,19 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.xml.crypto.Data;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "candidat")
+@Table(name = "candidate")
 public class Candidate extends User {
     @Column
-    private Data dob;
+    private LocalDate dob;
 
     @Column
     private long telephone;
@@ -41,8 +41,8 @@ public class Candidate extends User {
     private double salary;
 
     //todo
-//    @OneToMany(mappedBy = "")
-    private List<ExperienceOfWork> workList;
+    //@OneToMany(mappedBy = "")
+    //private List<ExperienceOfWork> workList;
 
     @Column
     private LocalDateTime created;
@@ -50,7 +50,7 @@ public class Candidate extends User {
     @Column
     private String cv;
 
-    @Override
+    /*@Override
     public String toString() {
         return "Candidate{" +
                 "dob=" + dob +
@@ -64,5 +64,5 @@ public class Candidate extends User {
                 ", created=" + created +
                 ", cv='" + cv + '\'' +
                 '}';
-    }
+    }*/
 }
