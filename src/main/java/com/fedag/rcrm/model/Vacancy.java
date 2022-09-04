@@ -6,35 +6,36 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "candidate_exp")
-public class ExperienceOfWork {
+@Table(name = "vacancy")
+public class Vacancy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "candidate_id")
-    private Candidate candidate;
+    @Column(name = "title")
+    private String title;
 
     @Column(name = "position")
     private String position;
 
-    @Column(name = "date_start")
-    private LocalDate date_start;
+    @Column(name = "salary")
+    private double salary;
 
-    @Column(name = "date_end")
-    private LocalDate date_end;
+    @Column(name = "creation_date")
+    private LocalDateTime creationDate;
 
     @Column(name = "comment")
     private String comment;
+
+    @ManyToMany(mappedBy = "vacancies")
+    private List<HR> hrList;
 }

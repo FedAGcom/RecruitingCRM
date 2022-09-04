@@ -1,39 +1,36 @@
 package com.fedag.rcrm.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "candidate_exp")
-public class ExperienceOfWork {
+@Table(name = "feedback")
+public class Feedback {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Column(name= "feedback_id")
+    private Long feedback_id;
 
     @ManyToOne
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
 
-    @Column(name = "position")
-    private String position;
+    @ManyToOne
+    @JoinColumn(name = "hr_id")
+    private HR hr;
 
-    @Column(name = "date_start")
-    private LocalDate date_start;
-
-    @Column(name = "date_end")
-    private LocalDate date_end;
+    @Column(name = "rating")
+    private int rating;
 
     @Column(name = "comment")
     private String comment;

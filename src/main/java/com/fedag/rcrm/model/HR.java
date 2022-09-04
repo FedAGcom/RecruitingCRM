@@ -6,36 +6,38 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table
+@Table(name = "hr")
 public class HR extends Employee {
 
-    //todo
+    @Column(name = "login")
+    private String login;
+
+    @Column(name = "password")
     private char[] password;
 
-    //todo
-   // private Set<Role> roles;
+    @ElementCollection(targetClass = Role.class)
+    @CollectionTable(name = "enum_role_type", joinColumns = @JoinColumn(name = "hr_id"))
+    @Enumerated(value = EnumType.STRING)
+    private Set<Role> roles;
 
-    @Column
-    private LocalDateTime created;
+    @Column(name = "creation_date")
+    private LocalDateTime creationDate;
 
-    /*@Override
-    public String toString() {
-        return "HR{" +
-                "password=" + Arrays.toString(password) +
-                ", roles=" + roles +
-                ", created=" + created +
-                '}';
-    }*/
+    @OneToMany(mappedBy = "hr", fetch = FetchType.EAGER)
+    private List<Candidate> candidates;
+
+    @ManyToMany()
+    private List<Vacancy> vacancies;
 }
