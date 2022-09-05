@@ -5,11 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @NoArgsConstructor
@@ -19,50 +18,52 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "candidate")
 public class Candidate extends User {
-    @Column
-    private LocalDate dob;
 
-    @Column
-    private long telephone;
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
-    @Column
+    @Column(name = "email")
     private String email;
 
-    @Column
-    private String citizenship;
 
-    @Column
+    @Column(name = "residence")
     private String residence;
 
-    @Column
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "position")
     private String position;
 
-    @Column
+    @Column(name = "salary")
     private double salary;
 
-    //todo
-    //@OneToMany(mappedBy = "")
-    //private List<ExperienceOfWork> workList;
+    @Column(name = "birthdate")
+    private LocalDate birthdate;
 
-    @Column
-    private LocalDateTime created;
+    @Column(name = "creation_date")
+    private LocalDateTime creationDate;
 
-    @Column
-    private String cv;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "hr_id")
+    private HR hr;
 
-    /*@Override
-    public String toString() {
-        return "Candidate{" +
-                "dob=" + dob +
-                ", telephone=" + telephone +
-                ", email='" + email + '\'' +
-                ", citizenship='" + citizenship + '\'' +
-                ", residence='" + residence + '\'' +
-                ", position='" + position + '\'' +
-                ", salary=" + salary +
-                ", workList=" + workList +
-                ", created=" + created +
-                ", cv='" + cv + '\'' +
-                '}';
-    }*/
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "total_rating")
+    private double totalRating;
+
+    @Column(name = "cv_link")
+    private String cvLink;
+
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
+    private List<ExperienceOfWork> experienceOfWorksList;
+
+    @OneToMany(mappedBy = "candidate")
+    private List<Feedback> feedbacks;
+
 }
