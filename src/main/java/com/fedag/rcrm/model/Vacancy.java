@@ -36,6 +36,12 @@ public class Vacancy {
     @Column(name = "comment")
     private String comment;
 
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "status")
+    private String status;
+
     @ManyToMany()
     @JoinTable(
             name = "hr_to_vacancy",

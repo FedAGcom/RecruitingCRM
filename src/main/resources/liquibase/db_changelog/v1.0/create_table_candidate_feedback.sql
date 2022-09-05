@@ -1,9 +1,9 @@
 CREATE TABLE candidate_feedback(
-    feedback_id BIGSERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     candidate_id BIGINT NOT NULL,
     hr_id BIGINT NOT NULL,
-    comment VARCHAR(2000),
     rating INTEGER NOT NULL,
-    FOREIGN KEY (hr_id) REFERENCES hr(id),
-    FOREIGN KEY (candidate_id) REFERENCES candidate(id)
+    comment VARCHAR(2000),
+    FOREIGN KEY (candidate_id) REFERENCES candidate(id),
+    FOREIGN KEY (hr_id) REFERENCES hr(id)
 );

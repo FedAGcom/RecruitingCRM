@@ -9,9 +9,8 @@
     <include file="db_changelog/v1.0/create_table_candidate.sql" relativeToChangelogFile="true"/>
     <include file="db_changelog/v1.0/create_table_candidate_exp.sql" relativeToChangelogFile="true"/>
     <include file="db_changelog/v1.0/create_table_candidate_feedback.sql" relativeToChangelogFile="true"/>
-    <include file="db_changelog/v1.0/create_table_candidate_rating.sql" relativeToChangelogFile="true"/>
-    <include file="db_changelog/v1.0/create_table_candidate_status.sql" relativeToChangelogFile="true"/>
     <include file="db_changelog/v1.0/create_table_hr_to_candidate.sql" relativeToChangelogFile="true"/>
+    <include file="db_changelog/v1.0/create_table_vacancy.sql" relativeToChangelogFile="true"/>
 
 
 </databaseChangeLog>
