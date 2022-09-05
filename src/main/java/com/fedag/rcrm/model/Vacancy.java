@@ -36,6 +36,11 @@ public class Vacancy {
     @Column(name = "comment")
     private String comment;
 
-    @ManyToMany(mappedBy = "vacancies")
+    @ManyToMany()
+    @JoinTable(
+            name = "hr_to_vacancy",
+            joinColumns = @JoinColumn(name = "vacancy_id"),
+            inverseJoinColumns = @JoinColumn(name = "hr_id")
+    )
     private List<HR> hrList;
 }

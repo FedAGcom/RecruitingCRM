@@ -39,5 +39,10 @@ public class HR extends Employee {
     private List<Candidate> candidates;
 
     @ManyToMany()
+    @JoinTable(
+            name = "hr_to_vacancy",
+            joinColumns = @JoinColumn(name = "hr_id"),
+            inverseJoinColumns = @JoinColumn(name = "vacancy_id")
+    )
     private List<Vacancy> vacancies;
 }
