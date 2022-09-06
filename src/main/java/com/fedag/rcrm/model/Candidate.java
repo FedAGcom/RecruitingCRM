@@ -66,4 +66,8 @@ public class Candidate extends User {
     @OneToMany(mappedBy = "candidate")
     private List<Feedback> feedbacks;
 
+    @ManyToOne
+    @JoinColumn(name = "vacancy_id")
+    private Vacancy vacancy;
+
 }

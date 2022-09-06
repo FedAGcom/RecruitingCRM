@@ -11,9 +11,11 @@ CREATE TABLE candidate (
     salary numeric NOT NULL,
     birthdate date NOT NULL,
     creation_date timestamp NOT NULL,
-    hr_id numeric NOT NULL,
+    hr_id bigint NOT NULL,
     status enum_candidate_state DEFAULT 'NEW',
     total_rating numeric DEFAULT '0',
     cv_link varchar(256) NOT NULL,
-    FOREIGN KEY (hr_id) REFERENCES hr(id)
+    vacancy_id bigint NOT NULL ,
+    FOREIGN KEY (hr_id) REFERENCES hr(id),
+    FOREIGN KEY (vacancy_id) REFERENCES vacancy(id)
 );

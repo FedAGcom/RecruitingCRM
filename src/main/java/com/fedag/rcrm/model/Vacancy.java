@@ -49,4 +49,7 @@ public class Vacancy {
             inverseJoinColumns = @JoinColumn(name = "hr_id")
     )
     private List<HR> hrList;
+
+    @OneToMany(mappedBy = "vacancy")
+    private List<Candidate> candidates;
 }
