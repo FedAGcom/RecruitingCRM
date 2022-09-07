@@ -23,7 +23,7 @@ public class FeedbackModel {
 
     @ManyToOne
     @JoinColumn(name = "candidate_id")
-    private CandidateModel candidateModel;
+    private CandidateModel candidate;
 
     @ManyToOne
     @JoinColumn(name = "hr_id")

@@ -48,7 +48,7 @@ public class CandidateModel extends UserModel {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "hr_id")
-    private HRModel hrModel;
+    private HRModel hr;
 
     @Column(name = "status")
     private String status;
@@ -60,13 +60,13 @@ public class CandidateModel extends UserModel {
     private String cvLink;
 
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
-    private List<ExperienceOfWorkModel> experienceOfWorksListModel;
+    private List<ExperienceOfWorkModel> experienceOfWorksList;
 
     @OneToMany(mappedBy = "candidate")
-    private List<FeedbackModel> feedbackModels;
+    private List<FeedbackModel> feedback;
 
     @ManyToOne
     @JoinColumn(name = "vacancy_id")
-    private VacancyModel vacancyModel;
+    private VacancyModel vacancy;
 
 }

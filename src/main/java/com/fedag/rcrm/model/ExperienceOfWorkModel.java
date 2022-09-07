@@ -23,7 +23,7 @@ public class ExperienceOfWorkModel {
 
     @ManyToOne
     @JoinColumn(name = "candidate_id")
-    private CandidateModel candidateModel;
+    private CandidateModel candidate;
 
     @Column(name = "position")
     private String position;

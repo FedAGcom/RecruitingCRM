@@ -35,7 +35,7 @@ public class HRModel extends EmployeeModel {
     private LocalDateTime creationDate;
 
     @OneToMany(mappedBy = "hr", fetch = FetchType.EAGER)
-    private List<CandidateModel> candidateModels;
+    private List<CandidateModel> candidate;
 
     @ManyToMany()
     @JoinTable(

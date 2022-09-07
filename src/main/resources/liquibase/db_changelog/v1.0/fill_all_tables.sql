@@ -1,3 +1,10 @@
+    INSERT INTO vacancy(id, title, position, salary, creation_date, comment, description, status)
+    VALUES
+            (1, 'Java Developer', 'Java Developer', 50000, '2021-03-12', 'comment', 'description', 'CLOSE'),
+            (2, 'PHP Developer', 'PHP Developer', 60000, '2022-09-01', 'comment', 'description', 'OPEN'),
+            (3, 'Javascript Developer', 'Javascript Developer', 70000, '2022-09-05', 'comment', 'description', 'PREPARED');
+
+
     INSERT INTO hr(id, first_name, lastname, login, password, creation_date)
     VALUES
            (1, 'Ivan', 'Ivanov', 'ivan@yandex.ru', '1234',  '2020-10-27 02:00:00'),
@@ -15,10 +22,10 @@
              1, 'NEW', 4.0, 'https:/', 1),
             (2, 'Aleksandr', 'Popov', '89847938745', 'alpopov@yandex.ru', 'RF',
              'Russia', 'Saint-Petersburg', 'Javascript Developer', 65000, '1996-05-12', '2022-08-12 12:00:00',
-             3, 'OFFER', 5.0, 'https:/', 2),
+             3, 'OFFER', 5.0, 'https:/', 3),
             (3, 'Dmitry', 'Petrov', '897389562854', 'dmp@yandex.ru', 'RF',
              'Russia', 'Moscow', 'PHP Developer', 85000, '1990-12-13', '2021-10-22 12:00:00',
-             2, 'ACCEPT', 3.0, 'https:/', 3);
+             2, 'ACCEPT', 3.0, 'https:/', 2);
 
     INSERT INTO candidate_exp(id, candidate_id, position, comment, date_start, date_end)
     VALUES
@@ -34,11 +41,6 @@
             (4, 3, 4, 3, 'bad'),
             (5, 2, 3, 5, 'good');
 
-    INSERT INTO vacancy(id, title, position, salary, creation_date, comment, description, status)
-    VALUES
-            (1, 'Java Developer', 'Java Developer', 50000, '2021-03-12', 'comment', 'description', 'CLOSE'),
-            (2, 'PHP Developer', 'PHP Developer', 60000, '2022-09-01', 'comment', 'description', 'OPEN'),
-            (3, 'Javascript Developer', 'Javascript Developer', 70000, '2022-09-05', 'comment', 'description', 'PREPARED');
 
     INSERT INTO hr_to_vacancy(hr_id, vacancy_id)
     VALUES

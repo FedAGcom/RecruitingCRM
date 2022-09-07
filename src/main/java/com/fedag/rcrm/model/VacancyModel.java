@@ -48,8 +48,8 @@ public class VacancyModel {
             joinColumns = @JoinColumn(name = "vacancy_id"),
             inverseJoinColumns = @JoinColumn(name = "hr_id")
     )
-    private List<HRModel> hrModelList;
+    private List<HRModel> hrs;
 
     @OneToMany(mappedBy = "vacancy")
-    private List<CandidateModel> candidateModels;
+    private List<CandidateModel> candidates;
 }
