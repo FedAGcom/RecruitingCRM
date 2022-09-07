@@ -17,14 +17,13 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "candidate")
-public class Candidate extends User {
+public class CandidateModel extends UserModel {
 
     @Column(name = "phone_number")
     private String phoneNumber;
 
     @Column(name = "email")
     private String email;
-
 
     @Column(name = "residence")
     private String residence;
@@ -49,7 +48,7 @@ public class Candidate extends User {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "hr_id")
-    private HR hr;
+    private HRModel hrModel;
 
     @Column(name = "status")
     private String status;
@@ -61,13 +60,13 @@ public class Candidate extends User {
     private String cvLink;
 
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
-    private List<ExperienceOfWork> experienceOfWorksList;
+    private List<ExperienceOfWorkModel> experienceOfWorksListModel;
 
     @OneToMany(mappedBy = "candidate")
-    private List<Feedback> feedbacks;
+    private List<FeedbackModel> feedbackModels;
 
     @ManyToOne
     @JoinColumn(name = "vacancy_id")
-    private Vacancy vacancy;
+    private VacancyModel vacancyModel;
 
 }

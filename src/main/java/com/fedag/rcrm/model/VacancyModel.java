@@ -15,7 +15,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "vacancy")
-public class Vacancy {
+public class VacancyModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,8 +48,8 @@ public class Vacancy {
             joinColumns = @JoinColumn(name = "vacancy_id"),
             inverseJoinColumns = @JoinColumn(name = "hr_id")
     )
-    private List<HR> hrList;
+    private List<HRModel> hrModelList;
 
     @OneToMany(mappedBy = "vacancy")
-    private List<Candidate> candidates;
+    private List<CandidateModel> candidateModels;
 }

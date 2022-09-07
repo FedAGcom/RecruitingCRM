@@ -1,7 +1,6 @@
 package com.fedag.rcrm.controller.impl;
 
 import com.fedag.rcrm.dao.impl.VacancyDao;
-import com.fedag.rcrm.model.Vacancy;
 import com.fedag.rcrm.model.dto.VacancyDto;
 import com.fedag.rcrm.service.VacancyService;
 import lombok.RequiredArgsConstructor;

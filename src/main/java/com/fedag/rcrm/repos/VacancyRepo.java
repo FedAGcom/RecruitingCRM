@@ -1,10 +1,10 @@
 package com.fedag.rcrm.repos;
 
-import com.fedag.rcrm.model.Vacancy;
+import com.fedag.rcrm.model.VacancyModel;
 import org.springframework.data.repository.CrudRepository;
 
-public interface VacancyRepo extends CrudRepository<Vacancy, Long> {
+public interface VacancyRepo extends CrudRepository<VacancyModel, Long> {
 
-    Vacancy findByTitle(String title);
+    VacancyModel findByTitle(String title);
 
 }

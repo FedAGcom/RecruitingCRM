@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -19,7 +18,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "hr")
-public class HR extends Employee {
+public class HRModel extends EmployeeModel {
 
     @Column(name = "login")
     private String login;
@@ -36,7 +35,7 @@ public class HR extends Employee {
     private LocalDateTime creationDate;
 
     @OneToMany(mappedBy = "hr", fetch = FetchType.EAGER)
-    private List<Candidate> candidates;
+    private List<CandidateModel> candidateModels;
 
     @ManyToMany()
     @JoinTable(
@@ -44,5 +43,5 @@ public class HR extends Employee {
             joinColumns = @JoinColumn(name = "hr_id"),
             inverseJoinColumns = @JoinColumn(name = "vacancy_id")
     )
-    private List<Vacancy> vacancies;
+    private List<VacancyModel> vacancies;
 }
