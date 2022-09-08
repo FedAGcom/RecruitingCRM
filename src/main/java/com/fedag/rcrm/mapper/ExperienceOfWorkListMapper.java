@@ -6,8 +6,8 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = ExperienceOfWorkMapper.class)
+@Mapper(componentModel = "spring", uses = {ExperienceOfWorkMapper.class, CandidateMapper.class})
 public interface ExperienceOfWorkListMapper {
-    List<ExperienceOfWorkModel> toListExpModel(List<ExperienceOfWorkDto> experienceOfWorkDtoList);
-    List<ExperienceOfWorkDto> toListExpDto(List<ExperienceOfWorkModel> experienceOfWorkModelList);
+    List<ExperienceOfWorkModel> toModel(List<ExperienceOfWorkDto> experienceOfWorkDtoList);
+    List<ExperienceOfWorkDto> toDto(List<ExperienceOfWorkModel> experienceOfWorkModelList);
 }

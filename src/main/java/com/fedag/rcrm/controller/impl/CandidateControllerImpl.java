@@ -2,6 +2,7 @@ package com.fedag.rcrm.controller.impl;
 
 import com.fedag.rcrm.controller.UserController;
 import com.fedag.rcrm.mapper.CandidateMapper;
+import com.fedag.rcrm.mapper.VacancyMapper;
 import com.fedag.rcrm.model.CandidateModel;
 import com.fedag.rcrm.model.dto.CandidateDto;
 import com.fedag.rcrm.service.impl.CandidateServiceImpl;
@@ -13,11 +14,13 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class CandidateControllerImpl implements UserController {
 
+
     private final CandidateServiceImpl candidateService;
 
-    @GetMapping(value = "/candidate/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/candidate/{id}")
     public CandidateDto getCandidate(@PathVariable Long id) {
-        return new CandidateDto();
+
+        return candidateService.getCandidate(id);
     }
 
 //    @GetMapping(value = "/candidate/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -26,10 +29,10 @@ public class CandidateControllerImpl implements UserController {
 //    }
 
     //todo
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public CandidateModel createCandidate(@RequestBody CandidateDto candidateDto) {
-        return CandidateMapper.INSTANCE.toModel(candidateDto);
-    }
+//    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+//    public CandidateModel createCandidate(@RequestBody CandidateDto candidateDto) {
+//        return CandidateMapper.INSTANCE.toModel(candidateDto);
+//    }
 
 
 }

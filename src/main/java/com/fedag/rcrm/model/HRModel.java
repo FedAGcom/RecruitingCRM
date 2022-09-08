@@ -27,8 +27,9 @@ public class HRModel extends EmployeeModel {
     private char[] password;
 
     @ElementCollection(targetClass = Role.class)
-    @CollectionTable(name = "enum_role_type", joinColumns = @JoinColumn(name = "hr_id"))
+    @CollectionTable(name = "hr_to_role", joinColumns = @JoinColumn(name = "hr_id"))
     @Enumerated(value = EnumType.STRING)
+    @Column(name = "role")
     private Set<Role> roles;
 
     @Column(name = "creation_date")

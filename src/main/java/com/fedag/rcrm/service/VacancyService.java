@@ -11,6 +11,6 @@ public interface VacancyService {
 
     VacancyModel deleteVacancy(Long id);
 
-    VacancyModel getVacancyById(Long id);
+    VacancyDto getVacancyById(Long id);
 
 }

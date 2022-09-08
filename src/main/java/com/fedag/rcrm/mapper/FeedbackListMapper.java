@@ -6,8 +6,8 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = FeedbackMapper.class)
+@Mapper(componentModel = "spring", uses = {FeedbackMapper.class, CandidateMapper.class})
 public interface FeedbackListMapper {
-    List<FeedbackModel> toListFeedbackModel(List<FeedbackDto> feedbackDtoList);
-    List<FeedbackDto> toListFeedbackDto(List<FeedbackModel> feedbackModelList);
+    List<FeedbackModel> toModel(List<FeedbackDto> feedbackDtoList);
+    List<FeedbackDto> toDto(List<FeedbackModel> feedbackModelList);
 }

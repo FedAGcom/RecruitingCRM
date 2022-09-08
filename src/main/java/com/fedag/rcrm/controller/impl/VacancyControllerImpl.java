@@ -1,37 +1,37 @@
 package com.fedag.rcrm.controller.impl;
 
-import com.fedag.rcrm.dao.impl.VacancyDao;
+
+import com.fedag.rcrm.mapper.VacancyMapper;
 import com.fedag.rcrm.model.dto.VacancyDto;
 import com.fedag.rcrm.service.VacancyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 @RequiredArgsConstructor
-@Controller
+@RestController
 @RequestMapping("/vacancies")
 public class VacancyControllerImpl{
 
+
     private final VacancyService vacancyService;
-
-    public void createVacancy(VacancyDto vacancyDto) {
-
-    }
-
-
-    public void getById(Long id) {
-        //Vacancy vacancy = vacancies.getVacancyById(id);
+    @GetMapping("/{id}")
+    public VacancyDto getById(@PathVariable Long id) {
+        return vacancyService.getVacancyById(id);
 
     }
 
 
-    public void deleteVacancy(Long id) {
 
-    }
+//
+//
+//    public void deleteVacancy(Long id) {
+//
+//    }
 
 
-    public void updateVacancy(VacancyDao vacancyDao, Long id) {
-
-    }
+//    public void updateVacancy(VacancyDao vacancyDao, Long id) {
+//
+//    }
 }
