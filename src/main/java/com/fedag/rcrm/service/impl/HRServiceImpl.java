@@ -2,52 +2,54 @@ package com.fedag.rcrm.service.impl;
 
 import com.fedag.rcrm.mapper.HRMapper;
 import com.fedag.rcrm.model.HRModel;
+import com.fedag.rcrm.model.dto.request.HRRequestDto;
+import com.fedag.rcrm.model.dto.request.HRRequestUpdateDto;
+import com.fedag.rcrm.model.dto.response.HRResponseDto;
 import com.fedag.rcrm.repos.HRRepo;
-import com.fedag.rcrm.service.UserService;
+import com.fedag.rcrm.service.HRService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-import java.util.Optional;
+import java.util.List;
 
-@Service
+@Component
 @RequiredArgsConstructor
-public class HRServiceImpl implements UserService {
-
-    private final HRRepo hrRepo;
+public class HRServiceImpl implements HRService {
 
     private final HRMapper hrMapper;
+    private final HRRepo hrRepo;
 
-
-    public HRDto getHR(Long id) {
-        Optional<HRModel>  hrModel = hrRepo.findById(id);
-
-        if(hrModel.isPresent()){
-            System.out.println(hrModel.get().getCandidate().get(0).getFirstName());
-            System.out.println(hrModel.get().getCandidate().get(0).getId());
-            System.out.println(hrModel.get().getCandidate().get(0).getLastname());
-            System.out.println(hrModel.get().getCandidate().get(0).getPhoneNumber());
-            System.out.println(hrModel.get().getCandidate().get(0).getEmail());
-            System.out.println(hrModel.get().getCandidate().get(0).getResidence());
-            System.out.println(hrModel.get().getCandidate().get(0).getCountry());
-            System.out.println(hrModel.get().getCandidate().get(0).getCity());
-            System.out.println(hrModel.get().getCandidate().get(0).getPosition());
-            System.out.println(hrModel.get().getCandidate().get(0).getSalary());
-            System.out.println(hrModel.get().getCandidate().get(0).getBirthdate());
-            System.out.println(hrModel.get().getCandidate().get(0).getSalary());
-            System.out.println(hrModel.get().getCandidate().get(0).getHr().getId());
-            System.out.println(hrModel.get().getCandidate().get(0).getStatus());
-            System.out.println(hrModel.get().getCandidate().get(0).getTotalRating());
-            System.out.println(hrModel.get().getCandidate().get(0).getExperienceOfWorksList().get(0).getPosition());
-            System.out.println(hrModel.get().getCandidate().get(0).getVacancy().getPosition());
-            System.out.println(hrModel.get().getCandidate().get(0).getFeedback().get(0).getComment());
-            System.out.println("");
-            HRDto hrDto = hrMapper.toDto(hrModel.get());
-            System.out.println("");
-            return hrDto;
-        }
-        else{
-            return new HRDto();
-        }
+    @Override
+    public HRResponseDto findById(Long id) {
+        HRModel hrModel = hrRepo.findById(id).orElseThrow(()->new RuntimeException("HR with id " + id + " not found"));
+        return hrMapper.toResponse(hrModel);
     }
 
+    @Override
+    public HRResponseDto findByLogin(String login) {
+        HRModel hrModel = hrRepo.findByLogin(login).orElseThrow(()-> new RuntimeException("HR with login" +
+                login + " not found"));
+        return hrMapper.toResponse(hrModel);
+    }
+
+    @Override
+    public List<HRResponseDto> getAllHRs() {
+        return null;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
+    }
+
+    @Override
+    public void update(HRRequestUpdateDto hrRequest) {
+        HRModel hrModel = hrMapper.fromRequestUpdate(hrRequest);
+        hrRepo.save(hrModel);
+    }
+
+    @Override
+    public void addHr(HRRequestDto hrRequestDto) {
+
+    }
 }

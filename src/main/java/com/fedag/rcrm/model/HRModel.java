@@ -1,16 +1,13 @@
 package com.fedag.rcrm.model;
 
 import com.fedag.rcrm.enums.Role;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
-
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,7 +33,7 @@ public class HRModel extends EmployeeModel {
     private LocalDateTime creationDate;
 
     @OneToMany(mappedBy = "hr", fetch = FetchType.EAGER)
-    private List<CandidateModel> candidate;
+    private List<CandidateModel> candidates;
 
     @ManyToMany()
     @JoinTable(
