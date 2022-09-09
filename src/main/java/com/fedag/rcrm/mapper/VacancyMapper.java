@@ -2,9 +2,10 @@ package com.fedag.rcrm.mapper;
 
 
 import com.fedag.rcrm.model.VacancyModel;
+import com.fedag.rcrm.model.dto.request.VacancyRequestDto;
 
 public interface VacancyMapper {
-    VacancyDto toDto(VacancyModel vacancyModel);
-    VacancyModel toModel(VacancyDto vacancyDto);
+    VacancyRequestDto toDto(VacancyModel vacancyModel);
+    VacancyModel toModel(VacancyRequestDto vacancyDto);
 
 }

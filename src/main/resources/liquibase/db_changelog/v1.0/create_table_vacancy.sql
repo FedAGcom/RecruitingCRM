@@ -4,7 +4,6 @@ CREATE TABLE vacancy (
     position varchar(256) NOT NULL,
     salary numeric NOT NULL,
     creation_date timestamp NOT NULL,
-    comment varchar(256),
     description varchar(256) NOT NULL,
     status enum_vacancy_state DEFAULT 'PREPARED'
 );
