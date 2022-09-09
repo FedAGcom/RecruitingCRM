@@ -5,15 +5,16 @@ import com.fedag.rcrm.model.CandidateModel;
 import com.fedag.rcrm.model.dto.response.CandidateResponseDto;
 import com.fedag.rcrm.repos.CandidateRepo;
 import com.fedag.rcrm.service.CandidateService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service("candidate service")
+@RequiredArgsConstructor
 public class CandidateServiceImpl implements CandidateService {
 
-    private CandidateRepo repo;
-    private CandidateMapperImpl mapper;
+    private final CandidateRepo repo;
+    private final CandidateMapperImpl mapper;
 
     @Override
     public CandidateResponseDto getCandidate(Long id) {
