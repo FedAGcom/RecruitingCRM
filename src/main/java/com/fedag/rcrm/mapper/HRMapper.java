@@ -2,10 +2,11 @@
 package com.fedag.rcrm.mapper;
 
 import com.fedag.rcrm.model.HRModel;
+import com.fedag.rcrm.model.dto.request.HRRequestDto;
 
 public interface HRMapper {
-    HRDto toDto(HRModel hrModel);
-    HRModel toModel(HRDto hrDto);
+    HRRequestDto toDto(HRModel hrModel);
+    HRModel toModel(HRRequestDto hrDto);
 
 
 }

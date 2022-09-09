@@ -33,9 +33,6 @@ public class VacancyModel {
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
 
-    @Column(name = "comment")
-    private String comment;
-
     @Column(name = "description")
     private String description;
 

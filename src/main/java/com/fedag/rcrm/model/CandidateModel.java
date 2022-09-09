@@ -19,29 +19,14 @@ import java.util.List;
 @Table(name = "candidate")
 public class CandidateModel extends UserModel {
 
-    @Column(name = "phone_number")
-    private String phoneNumber;
-
     @Column(name = "email")
     private String email;
-
-    @Column(name = "residence")
-    private String residence;
-
-    @Column(name = "country")
-    private String country;
-
-    @Column(name = "city")
-    private String city;
 
     @Column(name = "position")
     private String position;
 
     @Column(name = "salary")
     private double salary;
-
-    @Column(name = "birthdate")
-    private LocalDate birthdate;
 
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
@@ -52,18 +37,6 @@ public class CandidateModel extends UserModel {
 
     @Column(name = "status")
     private String status;
-
-    @Column(name = "total_rating")
-    private double totalRating;
-
-    @Column(name = "cv_link")
-    private String cvLink;
-
-    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
-    private List<ExperienceOfWorkModel> experienceOfWorksList;
-
-    @OneToMany(mappedBy = "candidate")
-    private List<FeedbackModel> feedback;
 
     @ManyToOne
     @JoinColumn(name = "vacancy_id")

@@ -26,12 +26,6 @@ public class HRModel extends EmployeeModel {
     @Column(name = "password")
     private char[] password;
 
-    @ElementCollection(targetClass = Role.class)
-    @CollectionTable(name = "hr_to_role", joinColumns = @JoinColumn(name = "hr_id"))
-    @Enumerated(value = EnumType.STRING)
-    @Column(name = "role")
-    private Set<Role> roles;
-
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
 
