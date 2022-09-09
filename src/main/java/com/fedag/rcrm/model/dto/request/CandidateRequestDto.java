@@ -1,23 +1,17 @@
-package com.fedag.rcrm.model.dto;
+package com.fedag.rcrm.model.dto.request;
 
-
-import com.fedag.rcrm.model.ExperienceOfWorkModel;
-import com.fedag.rcrm.model.FeedbackModel;
-import com.fedag.rcrm.model.HRModel;
-import com.fedag.rcrm.model.VacancyModel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class CandidateDto {
-
+public class CandidateRequestDto {
     private String phoneNumber;
 
     private String email;
@@ -49,5 +43,4 @@ public class CandidateDto {
     private List<FeedbackDto> feedbackDto;
 
     private VacancyDto vacancy;
-
 }

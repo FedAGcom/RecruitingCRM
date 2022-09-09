@@ -1,9 +1,7 @@
 package com.fedag.rcrm.service.impl;
 
-import com.fedag.rcrm.mapper.CycleAvoidingMappingContext;
 import com.fedag.rcrm.mapper.VacancyMapper;
 import com.fedag.rcrm.model.VacancyModel;
-import com.fedag.rcrm.model.dto.VacancyDto;
 import com.fedag.rcrm.repos.VacancyRepo;
 import com.fedag.rcrm.service.VacancyService;
 import org.springframework.stereotype.Service;
@@ -41,7 +39,7 @@ public class VacancyServiceImpl implements VacancyService {
     public VacancyDto getVacancyById(Long id) {
         Optional<VacancyModel> vacancyModel = vacancyRepo.findById(id);
         if(vacancyModel.isPresent()){
-            return vacancyMapper.toDto(vacancyModel.get(), new CycleAvoidingMappingContext());
+            return vacancyMapper.toDto(vacancyModel.get());
         }
         else{
             return new VacancyDto();

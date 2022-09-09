@@ -1,16 +1,8 @@
 package com.fedag.rcrm.service;
 
 import com.fedag.rcrm.model.VacancyModel;
-import com.fedag.rcrm.model.dto.VacancyDto;
+import com.fedag.rcrm.model.dto.request.VacancyRequestDto;
 
 public interface VacancyService {
-
-    VacancyModel createVacancy(VacancyDto vacancyDto);
-
-    VacancyModel updateVacancy(Long id, String title);
-
-    VacancyModel deleteVacancy(Long id);
-
-    VacancyDto getVacancyById(Long id);
-
+    VacancyRequestDto getVacancyById(Long id);
 }

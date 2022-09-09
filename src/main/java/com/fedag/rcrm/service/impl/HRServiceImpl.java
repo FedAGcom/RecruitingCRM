@@ -1,17 +1,10 @@
 package com.fedag.rcrm.service.impl;
 
-import com.fedag.rcrm.mapper.CandidateMapper;
-import com.fedag.rcrm.mapper.CycleAvoidingMappingContext;
 import com.fedag.rcrm.mapper.HRMapper;
-import com.fedag.rcrm.model.CandidateModel;
 import com.fedag.rcrm.model.HRModel;
-import com.fedag.rcrm.model.dto.CandidateDto;
-import com.fedag.rcrm.model.dto.HRDto;
 import com.fedag.rcrm.repos.HRRepo;
 import com.fedag.rcrm.service.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -48,7 +41,7 @@ public class HRServiceImpl implements UserService {
             System.out.println(hrModel.get().getCandidate().get(0).getVacancy().getPosition());
             System.out.println(hrModel.get().getCandidate().get(0).getFeedback().get(0).getComment());
             System.out.println("");
-            HRDto hrDto = hrMapper.toDto(hrModel.get(), new CycleAvoidingMappingContext());
+            HRDto hrDto = hrMapper.toDto(hrModel.get());
             System.out.println("");
             return hrDto;
         }
