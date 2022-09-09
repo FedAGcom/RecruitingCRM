@@ -36,6 +36,7 @@ public class CandidateServiceImpl implements CandidateService {
 //                System.out.println(candidateModel.get().getExperienceOfWorksList().get(i).getPosition() +
 //                        candidateModel.get().getExperienceOfWorksList().get(i).getCandidate().getId());
 //            }
+            System.out.println(candidateModel.get().getFeedback().get(0).getId());
             return candidateMapper.toDto(candidateModel.get(), new CycleAvoidingMappingContext());
         }
         else{

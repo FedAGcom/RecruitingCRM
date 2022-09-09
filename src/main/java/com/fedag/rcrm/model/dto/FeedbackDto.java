@@ -1,6 +1,7 @@
 package com.fedag.rcrm.model.dto;
 
 import com.fedag.rcrm.model.CandidateModel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -9,9 +10,9 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class FeedbackDto {
 
-    private CandidateDto candidateDto;
+    private Long candidateId;//todo
 
-    private HRDto hrModel;
+    private Long hrId;
 
     private int rating;
 

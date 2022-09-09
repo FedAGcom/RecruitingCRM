@@ -9,6 +9,6 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface ExperienceOfWorkMapper {
     ExperienceOfWorkModel toModel(ExperienceOfWorkDto experienceOfWorkDto);
-    @Mapping(ignore = true, target = "candidateDto")
+    @Mapping(source = "candidate.id", target = "candidateId")
     ExperienceOfWorkDto toDto(ExperienceOfWorkModel experienceOfWorkModel,  @Context CycleAvoidingMappingContext cycleAvoidingMappingContext);
 }

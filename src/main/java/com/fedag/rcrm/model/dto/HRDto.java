@@ -25,8 +25,10 @@ public class HRDto {
 
     private LocalDateTime creationDate;
 
-    private List<CandidateDto> candidateDto;
+    private List<Long> candidate;//todo
 
     private List<VacancyDto> vacancies;
+
+
 
 }

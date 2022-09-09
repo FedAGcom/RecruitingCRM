@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class ExperienceOfWorkDto {
 
-    private CandidateDto candidateDto;
+    private Long candidateId;//todo
 
     private String position;
 

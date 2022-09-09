@@ -18,6 +18,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CandidateDto {
 
+    private Long id;
+
     private String phoneNumber;
 
     private String email;
