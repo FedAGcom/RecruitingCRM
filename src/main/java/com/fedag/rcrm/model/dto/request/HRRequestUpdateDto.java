@@ -13,4 +13,5 @@ public class HRRequestUpdateDto {
     private String firstName;
     private String lastname;
     private String login;
+    private String password;
 }

@@ -3,14 +3,18 @@ package com.fedag.rcrm.service;
 import com.fedag.rcrm.model.dto.request.HRRequestDto;
 import com.fedag.rcrm.model.dto.request.HRRequestUpdateDto;
 import com.fedag.rcrm.model.dto.response.HRResponseDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 
 import java.util.List;
 
 public interface HRService {
-    public HRResponseDto findById(Long id);
-    public HRResponseDto findByLogin(String login);
-    public void addHr(HRRequestDto hrRequestDto);
-    public void deleteById(Long id);
-    public void update(HRRequestUpdateDto hrRequestUpdateDto);
-    public List<HRResponseDto> getAllHRs();
+    HRResponseDto findById(Long id);
+    HRResponseDto findByLogin(String login);
+    void create(HRRequestDto hrRequestDto);
+    void deleteById(Long id);
+    void update(HRRequestUpdateDto hrRequestUpdateDto);
+    Page<HRResponseDto> findAll(Pageable pageable);
+
 }

@@ -1,5 +1,6 @@
 package com.fedag.rcrm.service.impl;
 
+import com.fedag.rcrm.enums.Role;
 import com.fedag.rcrm.mapper.HRMapper;
 import com.fedag.rcrm.model.HRModel;
 import com.fedag.rcrm.model.dto.request.HRRequestDto;
@@ -8,11 +9,16 @@ import com.fedag.rcrm.model.dto.response.HRResponseDto;
 import com.fedag.rcrm.repos.HRRepo;
 import com.fedag.rcrm.service.HRService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+import static com.fedag.rcrm.enums.Role.ADMIN;
+import static com.fedag.rcrm.enums.Role.USER;
+
+@Service
 @RequiredArgsConstructor
 public class HRServiceImpl implements HRService {
     private final HRMapper hrMapper;
@@ -32,8 +38,8 @@ public class HRServiceImpl implements HRService {
     }
 
     @Override
-    public List<HRResponseDto> getAllHRs() {
-        return null;
+    public Page<HRResponseDto> findAll(Pageable pageable) {
+        return hrRepo.findAll(pageable).map(hrMapper::toResponse);
     }
 
     @Override
@@ -48,7 +54,8 @@ public class HRServiceImpl implements HRService {
     }
 
     @Override
-    public void addHr(HRRequestDto hrRequest) {
+    public void create(HRRequestDto hrRequest) {
 
     }
+
 }

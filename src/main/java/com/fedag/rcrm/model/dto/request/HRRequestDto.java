@@ -16,5 +16,4 @@ public class HRRequestDto {
     private String lastname;
     private String login;
     private char[] password;
-    private List<String> roles;
 }
