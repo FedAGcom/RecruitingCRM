@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -32,6 +33,7 @@ public class HRModel extends EmployeeModel {
     @Column(name = "role")
     private Set<Role> roles;
 
+    @CreationTimestamp
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
 
@@ -45,4 +47,28 @@ public class HRModel extends EmployeeModel {
             inverseJoinColumns = @JoinColumn(name = "vacancy_id")
     )
     private List<VacancyModel> vacancies;
+
+
+    @Column(name = "active")
+    private boolean active = true;
+
+    public void addCandidate(CandidateModel candidateModel){
+        this.candidates.add(candidateModel);
+        candidateModel.setHr(this);
+    }
+
+    public void  removeCandidate(CandidateModel candidateModel){
+        this.candidates.remove(candidateModel);
+    }
+
+    public void addVacancy(VacancyModel vacancyModel){
+        this.vacancies.add(vacancyModel);
+        vacancyModel.getHrs().add(this);
+    }
+
+    public void deleteVacancy(VacancyModel vacancyModel){
+        this.vacancies.remove(vacancyModel);
+        vacancyModel.getHrs().remove(this);
+    }
+
 }

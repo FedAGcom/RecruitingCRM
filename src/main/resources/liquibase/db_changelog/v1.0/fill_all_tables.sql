@@ -1,3 +1,9 @@
+    INSERT INTO role(role)
+    VALUES
+            ('USER'),
+            ('ADMIN');
+
+
     INSERT INTO vacancy(id, title, position, salary, creation_date, comment, description, status)
     VALUES
             (1, 'Java Developer', 'Java Developer', 50000, '2021-03-12', 'comment', 'description', 'CLOSE'),
@@ -5,12 +11,12 @@
             (3, 'Javascript Developer', 'Javascript Developer', 70000, '2022-09-05', 'comment', 'description', 'PREPARED');
 
 
-    INSERT INTO hr(id, first_name, lastname, login, password, creation_date)
+    INSERT INTO hr(first_name, lastname, login, password, creation_date, active)
     VALUES
-           (1, 'Ivan', 'Ivanov', 'ivan@yandex.ru', '1234',  '2020-10-27 02:00:00'),
-           (2, 'Aleksandr', 'Sidorov', 'alexs@yandex.ru', '2425',  '2021-11-13 02:00:00'),
-           (3, 'Dmitry', 'Androsov', 'da@yandex.ru', 'user',  '2020-08-21 02:00:00'),
-           (4, 'Ivan', 'Petrov', 'ivan@yandex.ru', '21646',  '2021-10-15 02:00:00');
+           ('Ivan', 'Ivanov', 'ivani@yandex.ru', '1234',  '2020-10-27 02:00:00', true),
+           ('Aleksandr', 'Sidorov', 'alexs@yandex.ru', '2425',  '2021-11-13 02:00:00', true),
+           ('Dmitry', 'Androsov', 'da@yandex.ru', 'user',  '2020-08-21 02:00:00', true),
+           ('Ivan', 'Petrov', 'ivanp@yandex.ru', '21646',  '2021-10-15 02:00:00', true);
 
 
     INSERT INTO candidate(id, first_name, lastname, phone_number, email, residence,
@@ -54,4 +60,5 @@
             (1, 'ADMIN'),
             (2, 'ADMIN'),
             (3, 'USER'),
-            (4, 'USER');
+            (4, 'USER'),
+            (1, 'USER');

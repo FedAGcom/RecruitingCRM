@@ -12,9 +12,11 @@ import java.util.List;
 public interface HRService {
     HRResponseDto findById(Long id);
     HRResponseDto findByLogin(String login);
-    void create(HRRequestDto hrRequestDto);
+    HRResponseDto create(HRRequestDto hrRequestDto);
     void deleteById(Long id);
-    void update(HRRequestUpdateDto hrRequestUpdateDto);
+    HRResponseDto update(Long id, HRRequestUpdateDto hrRequestUpdateDto);
     Page<HRResponseDto> findAll(Pageable pageable);
-
+    Page<HRResponseDto> findAllByRoleUser(Pageable pageable);
+    Page<HRResponseDto> findAllByRoleAdmin(Pageable pageable);
+    Page<HRResponseDto> findAllByActiveTrue(Pageable pageable);
 }

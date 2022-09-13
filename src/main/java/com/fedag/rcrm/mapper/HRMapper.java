@@ -9,4 +9,5 @@ public interface HRMapper {
     HRResponseDto toResponse(HRModel hrModel);
     HRModel fromRequest(HRRequestDto hrRequestDto);
     HRModel fromRequestUpdate(HRRequestUpdateDto hrRequestUpdateDto);
+    HRModel merge(HRModel source, HRModel target);
 }

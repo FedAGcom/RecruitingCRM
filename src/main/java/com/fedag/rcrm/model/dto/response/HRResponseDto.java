@@ -17,8 +17,10 @@ public class HRResponseDto {
     private Long id;
     private String firstName;
     private String lastname;
+    private String login;
     private List<String> roles;
     private LocalDateTime creationDate;
+    private boolean active;
     private List<Long> candidatesId;
     private List<Long> vacanciesId;
 }

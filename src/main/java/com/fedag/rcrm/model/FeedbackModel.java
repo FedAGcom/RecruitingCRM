@@ -13,12 +13,12 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "feedback")
+@Table(name = "candidate_feedback")
 public class FeedbackModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "feedback_id")
+    @Column(name= "id")
     private Long feedback_id;
 
     @ManyToOne
