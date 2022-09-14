@@ -11,4 +11,9 @@ public interface VacancyMapper {
     VacancyModel fromRequest(VacancyRequestDto vacancyRequestDto);
     VacancyModel fromRequestUpdate(VacancyRequestUpdateDto vacancyRequestUpdateDto);
 
+    VacancyModel merge(VacancyModel source, VacancyModel target);
+
+    VacancyModel toVacancyModelUpdate(VacancyModel vacancyModel, VacancyRequestUpdateDto vacancyRequestUpdateDto);
+
+
 }

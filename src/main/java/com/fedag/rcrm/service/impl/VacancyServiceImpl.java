@@ -1,5 +1,6 @@
 package com.fedag.rcrm.service.impl;
 
+import com.fedag.rcrm.exception.EntityNotFoundException;
 import com.fedag.rcrm.mapper.impl.VacancyMapperImpl;
 import com.fedag.rcrm.model.CandidateModel;
 import com.fedag.rcrm.model.HRModel;
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;
@@ -25,14 +27,12 @@ import java.util.List;
 public class VacancyServiceImpl implements VacancyService {
 
     private final VacancyMapperImpl vacancyMapper;
-    private final HRRepo hrRepo;
-    private final CandidateRepo candidateRepo;
     private final VacancyRepo vacancyRepo;
 
 
     @Override
     public VacancyResponseDto findById(Long id) {
-        VacancyModel vacancyModel = vacancyRepo.findById(id).orElseThrow(()->new RuntimeException("Vacancy with id " + id + " not found"));
+        VacancyModel vacancyModel = vacancyRepo.findById(id).orElseThrow(()->new EntityNotFoundException("Vacancy", "ID", id));
         return vacancyMapper.toResponse(vacancyModel);
     }
 
@@ -45,31 +45,34 @@ public class VacancyServiceImpl implements VacancyService {
 
 
     @Override
+    @Transactional
     public VacancyResponseDto create(VacancyRequestDto vacancyRequestDto) {
-        VacancyModel vacancyModel = new VacancyModel();
-        vacancyModel.setStatus(vacancyRequestDto.getStatus());
-        vacancyModel.setComment(vacancyRequestDto.getComment());
+        VacancyModel vacancyModel = vacancyMapper.fromRequest(vacancyRequestDto);
         vacancyModel.setCreationDate(LocalDateTime.now());
-        vacancyModel.setDescription(vacancyRequestDto.getDescription());
-        vacancyModel.setPosition(vacancyRequestDto.getPosition());
-        vacancyModel.setSalary(vacancyRequestDto.getSalary());
-        vacancyModel.setTitle(vacancyRequestDto.getTitle());
         vacancyRepo.save(vacancyModel);
         return vacancyMapper.toResponse(vacancyModel);
 
     }
 
     @Override
+    public Page<VacancyResponseDto> findAllByStatus( String status, Pageable pageable) {
+        return vacancyRepo.findAllByStatusContains(status, pageable).map(vacancyMapper::toResponse);
+    }
+
+
+
+    @Override
+    @Transactional
     public void deleteById(Long id) {
-        VacancyModel vacancyModel = vacancyRepo.findById(id).orElseThrow(()->new RuntimeException("Vacancy with id " + id + " not found"));
-        vacancyModel.setStatus("CLOSE");
-        vacancyRepo.save(vacancyModel);
+        this.findById(id);
+        vacancyRepo.deleteById(id);
     }
 
     @Override
-    public void update(VacancyRequestUpdateDto vacancyRequestUpdateDto) {
-        VacancyModel vacancyModel = vacancyMapper.fromRequestUpdate(vacancyRequestUpdateDto);
-        vacancyRepo.save(vacancyModel);
+    @Transactional
+    public VacancyResponseDto update(Long id, VacancyRequestUpdateDto vacancyRequestUpdateDto) {
+        VacancyModel model = vacancyRepo.findById(id).orElseThrow(()->new EntityNotFoundException("Vacancy", "ID", id));
+        return vacancyMapper.toResponse(vacancyMapper.toVacancyModelUpdate(model, vacancyRequestUpdateDto));
     }
 
     @Override

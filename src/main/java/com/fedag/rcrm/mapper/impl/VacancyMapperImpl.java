@@ -12,6 +12,8 @@ import com.fedag.rcrm.model.dto.response.VacancyResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Column;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Optional;
@@ -53,6 +55,43 @@ public class VacancyMapperImpl implements VacancyMapper {
     @Override
     public VacancyModel fromRequestUpdate(VacancyRequestUpdateDto vacancyRequestUpdateDto) {
         return objectMapper.convertValue(vacancyRequestUpdateDto, VacancyModel.class);
+    }
+
+    @Override
+    public VacancyModel merge(VacancyModel source, VacancyModel target) {
+        if(source.getTitle() != null){
+            target.setTitle(source.getTitle());
+        }
+        if(source.getPosition() != null){
+            target.setPosition(source.getPosition());
+        }
+        if(source.getSalary() >= Math.pow(0.0, -10)){
+            target.setSalary(source.getSalary());
+        }
+        if(source.getCreationDate() != null){
+            target.setCreationDate(source.getCreationDate());
+        }
+        if(source.getComment() != null){
+            target.setComment(source.getComment());
+        }
+        if(source.getDescription() != null){
+            target.setDescription(source.getDescription());
+        }
+        if(source.getStatus() != null){
+            target.setStatus(source.getStatus());
+        }
+
+        return target;
+    }
+
+    @Override
+    public VacancyModel toVacancyModelUpdate(VacancyModel vacancyModel, VacancyRequestUpdateDto vacancyRequestUpdateDto) {
+        return vacancyModel.setTitle(vacancyRequestUpdateDto.getTitle())
+                .setPosition(vacancyRequestUpdateDto.getPosition())
+                .setSalary(vacancyRequestUpdateDto.getSalary())
+                .setComment(vacancyRequestUpdateDto.getComment())
+                .setDescription(vacancyRequestUpdateDto.getDescription())
+                .setStatus(vacancyRequestUpdateDto.getStatus());
     }
 
 

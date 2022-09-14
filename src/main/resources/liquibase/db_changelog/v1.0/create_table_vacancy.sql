@@ -6,5 +6,6 @@ CREATE TABLE vacancy (
     creation_date timestamp NOT NULL,
     comment varchar(256),
     description varchar(256) NOT NULL,
-    status enum_vacancy_state DEFAULT 'PREPARED'
+    status varchar(64) DEFAULT 'PREPARED',
+    FOREIGN KEY (status) REFERENCES vacancy_status(status)
 );
