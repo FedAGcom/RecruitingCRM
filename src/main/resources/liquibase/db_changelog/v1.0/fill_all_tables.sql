@@ -68,3 +68,20 @@
             (3, 'USER'),
             (4, 'USER'),
             (1, 'USER');
+
+    INSERT INTO candidate_status(status)
+    VALUES
+         ('NEW'),
+         ('ACCEPT'),
+         ('CV_APPROVE'),
+         ('INTERVIEW_APPOINTED'),
+         ('INTERVIEW_PASSED'),
+         ('ON_APPROVAL'),
+         ('OFFER'),
+         ('PROBATION'),
+         ('STAFF'),
+         ('DENIAL_BY_HR'),
+         ('DENIAL_BY_CANDIDATE');
+
+
+

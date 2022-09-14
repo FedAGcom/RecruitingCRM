@@ -8,6 +8,7 @@
     <include file="db_changelog/v1.0/create_enum_types.sql" relativeToChangelogFile="true"/>
     <include file="db_changelog/v1.0/create_table_vacancy_status.sql" relativeToChangelogFile="true"/>
     <include file="db_changelog/v1.0/create_table_role.sql" relativeToChangelogFile="true"/>
+    <include file="db_changelog/v1.0/create_table_candidate_status.sql" relativeToChangelogFile="true"/>
     <include file="db_changelog/v1.0/create_table_vacancy.sql" relativeToChangelogFile="true"/>
     <include file="db_changelog/v1.0/create_table_hr.sql" relativeToChangelogFile="true"/>
     <include file="db_changelog/v1.0/create_table_candidate.sql" relativeToChangelogFile="true"/>
