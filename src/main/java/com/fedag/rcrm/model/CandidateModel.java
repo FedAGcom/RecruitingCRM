@@ -63,10 +63,15 @@ public class CandidateModel extends UserModel {
     private List<ExperienceOfWorkModel> experienceOfWorksList;
 
     @OneToMany(mappedBy = "candidate")
-    private List<FeedbackModel> feedback;
+    private List<FeedbackModel> feedbacks;
 
     @ManyToOne
     @JoinColumn(name = "vacancy_id")
     private VacancyModel vacancy;
+
+    public void addFeedback(FeedbackModel feedbackModel) {
+        feedbackModel.setCandidate(this);
+        feedbacks.add(feedbackModel);
+    }
 
 }

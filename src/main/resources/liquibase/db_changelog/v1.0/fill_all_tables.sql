@@ -19,17 +19,17 @@
            ('Ivan', 'Petrov', 'ivanp@yandex.ru', '21646',  '2021-10-15 02:00:00', true);
 
 
-    INSERT INTO candidate(id, first_name, lastname, phone_number, email, residence,
+    INSERT INTO candidate(first_name, lastname, phone_number, email, residence,
                           country, city, position, salary, birthdate, creation_date,
                           hr_id, status, total_rating, cv_link, vacancy_id)
     VALUES
-            (1, 'Aleksey', 'Smirnov', '89357638746', 'smirnov@yandex.ru', 'RF',
+            ('Aleksey', 'Smirnov', '89357638746', 'smirnov@yandex.ru', 'RF',
              'Russia', 'Vologda', 'Java Developer', 75000, '1998-11-05', '2020-08-21 12:00:00',
              1, 'NEW', 4.0, 'https:/', 1),
-            (2, 'Aleksandr', 'Popov', '89847938745', 'alpopov@yandex.ru', 'RF',
+            ('Aleksandr', 'Popov', '89847938745', 'alpopov@yandex.ru', 'RF',
              'Russia', 'Saint-Petersburg', 'Javascript Developer', 65000, '1996-05-12', '2022-08-12 12:00:00',
              3, 'OFFER', 5.0, 'https:/', 3),
-            (3, 'Dmitry', 'Petrov', '897389562854', 'dmp@yandex.ru', 'RF',
+            ('Dmitry', 'Petrov', '897389562854', 'dmp@yandex.ru', 'RF',
              'Russia', 'Moscow', 'PHP Developer', 85000, '1990-12-13', '2021-10-22 12:00:00',
              2, 'ACCEPT', 3.0, 'https:/', 2);
 
@@ -62,3 +62,20 @@
             (3, 'USER'),
             (4, 'USER'),
             (1, 'USER');
+
+    INSERT INTO candidate_status(status)
+    VALUES
+         ('NEW'),
+         ('ACCEPT'),
+         ('CV_APPROVE'),
+         ('INTERVIEW_APPOINTED'),
+         ('INTERVIEW_PASSED'),
+         ('ON_APPROVAL'),
+         ('OFFER'),
+         ('PROBATION'),
+         ('STAFF'),
+         ('DENIAL_BY_HR'),
+         ('DENIAL_BY_CANDIDATE');
+
+
+
