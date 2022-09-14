@@ -37,7 +37,7 @@ public class HRModel extends EmployeeModel {
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
 
-    @OneToMany(mappedBy = "hr", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "hr", fetch = FetchType.LAZY)
     private List<CandidateModel> candidates;
 
     @ManyToMany()
@@ -47,6 +47,9 @@ public class HRModel extends EmployeeModel {
             inverseJoinColumns = @JoinColumn(name = "vacancy_id")
     )
     private List<VacancyModel> vacancies;
+
+    @OneToMany(mappedBy = "hr", fetch = FetchType.LAZY)
+    private List<FeedbackModel> feedbacks;
 
 
     @Column(name = "active")
@@ -60,6 +63,15 @@ public class HRModel extends EmployeeModel {
     public void  removeCandidate(CandidateModel candidateModel){
         this.candidates.remove(candidateModel);
     }
+
+    public void addFeedback(FeedbackModel feedbackModel){
+        this.feedbacks.add(feedbackModel);
+        feedbackModel.setHr(this);
+    }
+
+    /*public void  removeFeedback(FeedbackModel feedbackModel){
+        this.feedbacks.remove(feedbackModel);
+    }*/
 
     public void addVacancy(VacancyModel vacancyModel){
         this.vacancies.add(vacancyModel);

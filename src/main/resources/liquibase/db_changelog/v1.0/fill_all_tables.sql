@@ -45,13 +45,13 @@
             (2, 'HR', 'comment', '2018-01-02', '2019-03-12'),
             (1, 'QA', 'comment', '2021-12-13', '2022-02-12');
 
-    INSERT INTO candidate_feedback(candidate_id, hr_id, rating, comment)
+    INSERT INTO feedback(candidate_id, hr_id, rating, comment, created, updated, deleted)
     VALUES
-            (1, 1, 5, 'good'),
-            (1, 2, 3, 'bad'),
-            (2, 3, 5, 'good'),
-            (3, 4, 3, 'bad'),
-            (2, 3, 5, 'good');
+            (1, 1, 5, 'good', '2022-04-12', '2022-05-12', false),
+            (1, 2, 3, 'bad', '2021-06-23', null, false),
+            (2, 3, 5, 'good', '2020-11-12', '2021-03-23', false),
+            (3, 4, 3, 'bad', '2019-09-11', '2022-02-12', false),
+            (2, 3, 5, 'good', '2018-01-01', null, false);
 
 
     INSERT INTO hr_to_vacancy(hr_id, vacancy_id)

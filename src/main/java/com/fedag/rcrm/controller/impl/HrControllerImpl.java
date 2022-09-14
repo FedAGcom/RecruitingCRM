@@ -29,7 +29,7 @@ public class HrControllerImpl {
 
     @GetMapping
     public ResponseEntity<Page<HRResponseDto>>  findAll(@PageableDefault(size = 5) Pageable pageable){
-        return  new ResponseEntity<>(hrService.findAll(pageable), HttpStatus.OK);
+        return new ResponseEntity<>(hrService.findAll(pageable), HttpStatus.OK);
     }
 
     @GetMapping("/users")
