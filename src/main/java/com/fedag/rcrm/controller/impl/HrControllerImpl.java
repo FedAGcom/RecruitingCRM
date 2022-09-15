@@ -4,62 +4,90 @@ import com.fedag.rcrm.model.dto.request.HRRequestDto;
 import com.fedag.rcrm.model.dto.request.HRRequestUpdateDto;
 import com.fedag.rcrm.model.dto.response.HRResponseDto;
 import com.fedag.rcrm.service.impl.HRServiceImpl;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/hrs")
+@Tag(name = "HR", description = "Работа с HR")
 public class HrControllerImpl {
     private final HRServiceImpl hrService;
 
+    @Operation(summary = "Получение HR по ID")
+    @ApiResponse(responseCode = "200", description = "HR найден",
+            content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
+    @ApiResponse(responseCode = "400", description = "Ошибка клиента",
+            content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
+    @ApiResponse(responseCode = "404", description = "HR не найден",
+            content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
+    @ApiResponse(responseCode = "500", description = "Ошибка сервера",
+            content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @GetMapping("/{id}")
-    public HRResponseDto findById(@PathVariable Long id){
-        return hrService.findById(id);
+    public ResponseEntity<HRResponseDto> findById(@PathVariable Long id){
+        return new ResponseEntity<>(hrService.findById(id), HttpStatus.OK);
     }
 
+    @Operation(summary = "Получение страницы с HRs")
+    @ApiResponse(responseCode = "200", description = "HRs найдены",
+            content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
+    @ApiResponse(responseCode = "500", description = "Ошибка сервера",
+            content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @GetMapping
     public ResponseEntity<Page<HRResponseDto>>  findAll(@PageableDefault(size = 5) Pageable pageable){
-        return  new ResponseEntity<>(hrService.findAll(pageable), HttpStatus.OK);
+        return new ResponseEntity<>(hrService.findAll(pageable), HttpStatus.OK);
     }
 
-    @GetMapping("/users")
-    public ResponseEntity<Page<HRResponseDto>> findAllByRoleUser(@PageableDefault(size = 5)
+    @Operation(summary = "Получение страницы с HRs по роли")
+    @ApiResponse(responseCode = "200", description = "HRs найдены",
+            content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
+    @ApiResponse(responseCode = "500", description = "Ошибка сервера",
+            content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
+    @GetMapping("role/{role}")
+    public ResponseEntity<Page<HRResponseDto>> findAllByRole(@PathVariable String role,
+                                                                     @PageableDefault(size = 5)
                                                                              Pageable pageable) {
-        Page<HRResponseDto> users = hrService.findAllByRoleUser(pageable);
+        Page<HRResponseDto> users = hrService.findAllByRole(role, pageable);
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @GetMapping("/active")
-    public ResponseEntity<Page<HRResponseDto>> findAllByActiveTrue(@PageableDefault(size = 5)
-                                                                         Pageable pageable) {
-        Page<HRResponseDto> users = hrService.findAllByActiveTrue(pageable);
-        return new ResponseEntity<>(users, HttpStatus.OK);
-    }
-
-    @GetMapping("/admins")
-    public ResponseEntity<Page<HRResponseDto>> findAllByRoleAdmin(@PageableDefault(size = 5)
-                                                                         Pageable pageable) {
-        Page<HRResponseDto> users = hrService.findAllByRoleAdmin(pageable);
-        return new ResponseEntity<>(users, HttpStatus.OK);
-    }
-
-
+    @Operation(summary = "Удаление HR по ID")
+    @ApiResponse(responseCode = "200", description = "HR удалён",
+            content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
+    @ApiResponse(responseCode = "400", description = "Ошибка клиента",
+            content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
+    @ApiResponse(responseCode = "404", description = "HR не найден",
+            content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
+    @ApiResponse(responseCode = "500", description = "Ошибка сервера",
+            content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Long id){
         hrService.deleteById(id);
         return new ResponseEntity<>("User deleted", HttpStatus.OK);
     }
 
+    @Operation(summary = "Обновление HR по ID")
+    @ApiResponse(responseCode = "200", description = "HR обновлён",
+            content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
+    @ApiResponse(responseCode = "400", description = "Ошибка клиента",
+            content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
+    @ApiResponse(responseCode = "404", description = "HR не найден",
+            content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
+    @ApiResponse(responseCode = "500", description = "Ошибка сервера",
+            content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @PatchMapping("/{id}")
     public ResponseEntity<HRResponseDto> update(@PathVariable Long id,
                                                     @RequestBody @Valid HRRequestUpdateDto hrRequestUpdate) {
@@ -68,6 +96,13 @@ public class HrControllerImpl {
         return new ResponseEntity<>(hrResponseDto, HttpStatus.OK);
     }
 
+    @Operation(summary = "Создание HR")
+    @ApiResponse(responseCode = "200", description = "HR создан",
+            content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
+    @ApiResponse(responseCode = "400", description = "Ошибка клиента",
+            content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
+    @ApiResponse(responseCode = "500", description = "Ошибка сервера",
+            content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @PostMapping
     public ResponseEntity<HRResponseDto> create(@RequestBody @Valid HRRequestDto hrRequestDto) {
         HRResponseDto hrResponseDto = hrService.create(hrRequestDto);

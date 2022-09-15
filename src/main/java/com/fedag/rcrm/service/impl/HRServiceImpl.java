@@ -1,5 +1,6 @@
 package com.fedag.rcrm.service.impl;
 
+import com.fedag.rcrm.enums.Role;
 import com.fedag.rcrm.exception.EntityAlreadyExistsException;
 import com.fedag.rcrm.exception.EntityNotFoundException;
 import com.fedag.rcrm.mapper.HRMapper;
@@ -39,7 +40,7 @@ public class HRServiceImpl implements HRService {
 
     @Override
     public Page<HRResponseDto> findAll(Pageable pageable) {
-        return hrRepo.findAll(pageable).map(hrMapper::toResponse);
+        return hrRepo.findAllByActiveTrue(pageable).map(hrMapper::toResponse);
     }
 
     @Transactional
@@ -73,17 +74,7 @@ public class HRServiceImpl implements HRService {
     }
 
     @Override
-    public Page<HRResponseDto> findAllByRoleUser(Pageable pageable) {
-        return  hrRepo.findAllByRolesContains(USER, pageable).map(hrMapper::toResponse);
-    }
-
-    @Override
-    public Page<HRResponseDto> findAllByRoleAdmin(Pageable pageable) {
-        return hrRepo.findAllByRolesContains(ADMIN, pageable).map(hrMapper::toResponse);
-    }
-
-    @Override
-    public Page<HRResponseDto> findAllByActiveTrue(Pageable pageable) {
-        return hrRepo.findAllByActiveTrue(pageable).map(hrMapper::toResponse);
+    public Page<HRResponseDto> findAllByRole(String role, Pageable pageable) {
+        return  hrRepo.findAllByRolesContainsAndActiveTrue(Role.valueOf(role.toUpperCase()), pageable).map(hrMapper::toResponse);
     }
 }

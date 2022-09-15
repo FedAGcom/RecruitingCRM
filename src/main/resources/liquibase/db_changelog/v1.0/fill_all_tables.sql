@@ -27,17 +27,17 @@
 
     INSERT INTO candidate(first_name, lastname, phone_number, email, residence,
                           country, city, position, salary, birthdate, creation_date,
-                          hr_id, status, total_rating, cv_link, vacancy_id)
+                          hr_id, status, total_rating, cv_link, vacancy_id, delete)
     VALUES
             ('Aleksey', 'Smirnov', '89357638746', 'smirnov@yandex.ru', 'RF',
              'Russia', 'Vologda', 'Java Developer', 75000, '1998-11-05', '2020-08-21 12:00:00',
-             1, 'NEW', 4.0, 'https:/', 1),
+             1, 'NEW', 4.0, 'https:/', 1, FALSE),
             ('Aleksandr', 'Popov', '89847938745', 'alpopov@yandex.ru', 'RF',
              'Russia', 'Saint-Petersburg', 'Javascript Developer', 65000, '1996-05-12', '2022-08-12 12:00:00',
-             3, 'OFFER', 5.0, 'https:/', 3),
+             3, 'OFFER', 5.0, 'https:/', 3, FALSE),
             ('Dmitry', 'Petrov', '897389562854', 'dmp@yandex.ru', 'RF',
              'Russia', 'Moscow', 'PHP Developer', 85000, '1990-12-13', '2021-10-22 12:00:00',
-             2, 'ACCEPT', 3.0, 'https:/', 2);
+             2, 'ACCEPT', 3.0, 'https:/', 2, FALSE);
 
     INSERT INTO candidate_exp(candidate_id, position, comment, date_start, date_end)
     VALUES
@@ -45,13 +45,13 @@
             (2, 'HR', 'comment', '2018-01-02', '2019-03-12'),
             (1, 'QA', 'comment', '2021-12-13', '2022-02-12');
 
-    INSERT INTO candidate_feedback(candidate_id, hr_id, rating, comment)
+    INSERT INTO feedback(candidate_id, hr_id, rating, comment, created, updated, deleted)
     VALUES
-            (1, 1, 5, 'good'),
-            (1, 2, 3, 'bad'),
-            (2, 3, 5, 'good'),
-            (3, 4, 3, 'bad'),
-            (2, 3, 5, 'good');
+            (1, 1, 5, 'good', '2022-04-12', '2022-05-12', false),
+            (1, 2, 3, 'bad', '2021-06-23', null, false),
+            (2, 3, 5, 'good', '2020-11-12', '2021-03-23', false),
+            (3, 4, 3, 'bad', '2019-09-11', '2022-02-12', false),
+            (2, 3, 5, 'good', '2018-01-01', null, false);
 
 
     INSERT INTO hr_to_vacancy(hr_id, vacancy_id)

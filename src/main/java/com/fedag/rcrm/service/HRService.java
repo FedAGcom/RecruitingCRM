@@ -16,7 +16,5 @@ public interface HRService {
     void deleteById(Long id);
     HRResponseDto update(Long id, HRRequestUpdateDto hrRequestUpdateDto);
     Page<HRResponseDto> findAll(Pageable pageable);
-    Page<HRResponseDto> findAllByRoleUser(Pageable pageable);
-    Page<HRResponseDto> findAllByRoleAdmin(Pageable pageable);
-    Page<HRResponseDto> findAllByActiveTrue(Pageable pageable);
+    Page<HRResponseDto> findAllByRole(String role, Pageable pageable);
 }

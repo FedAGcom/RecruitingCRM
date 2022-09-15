@@ -24,15 +24,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Accessors(chain = true)
 public class CandidateMapperImpl implements CandidateMapper {
-
     private final ObjectMapper objectMapper;
-
     private final HRRepo hrRepo;
 
     @Override
     public CandidateResponseDto toCandidateResponseDto(CandidateModel model) {
         CandidateResponseDto dto = new CandidateResponseDto();
-
         dto.setId(model.getId());
         dto.setFirstName(model.getFirstName());
         dto.setLastname(model.getLastname());
@@ -47,24 +44,20 @@ public class CandidateMapperImpl implements CandidateMapper {
         dto.setCreationDate(model.getCreationDate());
         dto.setHrId(model.getHr().getId());
         dto.setCvLink(model.getCvLink());
-
         dto.setVacancyTitle(model
                 .getVacancy().getTitle());
-
         dto.setStatus(model.getStatus());
         dto.setTotalRating(model.getTotalRating());
-
         dto.setExperienceId(model
                 .getExperienceOfWorksList()
                 .stream().map(ExperienceOfWorkModel::getId)
                 .collect(Collectors.toList()));
-
         dto.setFeedbackId(model
                 .getFeedbacks()
                 .stream()
-                .map(FeedbackModel::getFeedback_id)
+                .map(FeedbackModel::getId)
                 .collect(Collectors.toList()));
-
+        dto.setDelete(model.isDelete());
         return dto;
     }
 
@@ -82,35 +75,13 @@ public class CandidateMapperImpl implements CandidateMapper {
         model.setSalary(dto.getSalary());
         model.setBirthdate(dto.getBirthdate());
         model.setCvLink(dto.getCvLink());
-
         model.setCreationDate(LocalDateTime.now());
         model.setStatus("NEW");
         HRModel hr = hrRepo.findById(1L).orElseThrow(()-> new RuntimeException("Error"));
         model.setHr(hr);
         model.setVacancy(hr.getVacancies().get(0));
-
         model.setExperienceOfWorksList(new LinkedList<>());
         model.setFeedbacks(new LinkedList<>());
-
-        return model;
-    }
-
-    @Override
-    public CandidateRequestUpdateDto toCandidateRequestUpdateDto(CandidateModel model) {
-        CandidateRequestUpdateDto dto = new CandidateRequestUpdateDto();
-
-        dto.setHr(model.getHr());
-        dto.setStatus(model.getStatus());
-        dto.setTotalRating(model.getTotalRating());
-
-        return dto;
-    }
-
-    @Override
-    public CandidateModel toCandidateModelUpdate(CandidateRequestUpdateDto dto, CandidateModel model) {
-        model.setHr(dto.getHr());
-        model.setStatus(dto.getStatus());
-        model.setTotalRating(dto.getTotalRating());
         return model;
     }
 
@@ -124,15 +95,24 @@ public class CandidateMapperImpl implements CandidateMapper {
     }
 
     @Override
-    public CandidateModel candidateModelMerge(CandidateModel source, CandidateRequestUpdateDto dto) {
-//        if (dto.getHr() != null) {
-//            source.setHr(dto.getHr());
-//        }
-//        if (dto.getStatus() != null) {
-//            source.setStatus(dto.getStatus());
-//        }
-
-
+    public CandidateModel toCandidateModelUpdate(CandidateModel source, CandidateRequestUpdateDto dto, HRModel hr, VacancyModel vacancy) {
+        source.setFirstName(dto.getFirstName());
+        source.setLastname(dto.getLastname());
+        source.setPhoneNumber(dto.getPhoneNumber());
+        source.setEmail(dto.getEmail());
+        source.setResidence(dto.getResidence());
+        source.setCountry(dto.getCountry());
+        source.setCity(dto.getCity());
+        source.setPosition(dto.getPosition());
+        source.setSalary(dto.getSalary());
+        source.setBirthdate(dto.getBirthdate());
+        source.setCreationDate(dto.getCreationDate());
+        source.setHr(hr);
+        source.setStatus(dto.getStatus());
+        source.setTotalRating(dto.getTotalRating());
+        source.setCvLink(dto.getCvLink());
+        source.setVacancy(vacancy);
+        source.setDelete(false);
         return source;
     }
 }
