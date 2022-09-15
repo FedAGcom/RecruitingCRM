@@ -20,7 +20,8 @@ public interface HRRepo extends JpaRepository<HRModel, Long> {
     @Query("UPDATE HRModel hr SET hr.active = false WHERE hr.id = :id")
     void deleteById(Long id);
 
-    Page<HRModel> findAllByRolesContains(Role role, Pageable pageable);
-
+    Page<HRModel> findAllByRolesContainsAndActiveTrue(Role role, Pageable pageable);
     Page<HRModel> findAllByActiveTrue(Pageable pageable);
+
+
 }

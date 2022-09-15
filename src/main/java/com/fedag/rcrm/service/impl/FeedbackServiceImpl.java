@@ -33,7 +33,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public Page<FeedbackResponseDto> findAll(Pageable pageable) {
-        return feedbackRepo.findAll(pageable).map(feedbackMapper::toResponse);
+        return feedbackRepo.findAllByDeletedFalse(pageable).map(feedbackMapper::toResponse);
     }
 
     @Transactional
@@ -53,14 +53,8 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Transactional
     @Override
     public void deleteById(Long id) {
-        FeedbackModel feedback = feedbackRepo.findById(id).orElseThrow(
-                ()->new RuntimeException());
-        feedback.setDeleted(true);
-        feedbackRepo.save(feedback);
-
-
-        /*this.findById(id);
-        feedbackRepo.deleteById(id);*/
+        this.findById(id);
+        feedbackRepo.deleteById(id);
     }
 
     @Transactional
