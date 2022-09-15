@@ -95,5 +95,5 @@ public class VacancyMapperImpl implements VacancyMapper {
                 .setStatus(vacancyRequestUpdateDto.getStatus());
     }
 
-
+//
 }

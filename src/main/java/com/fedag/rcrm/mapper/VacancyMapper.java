@@ -15,5 +15,5 @@ public interface VacancyMapper {
 
     VacancyModel toVacancyModelUpdate(VacancyModel vacancyModel, VacancyRequestUpdateDto vacancyRequestUpdateDto);
 
-
+//
 }

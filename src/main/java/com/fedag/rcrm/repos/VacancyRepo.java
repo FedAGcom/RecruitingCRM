@@ -22,5 +22,5 @@ public interface VacancyRepo extends JpaRepository<VacancyModel, Long> {
     /*@Modifying
     @Query("SELECT vacancy FROM VacancyModel vacancy WHERE vacancy.status = :status")*/
     Page<VacancyModel> findAllByStatusContains(String status, Pageable pageable);
-
+//
 }

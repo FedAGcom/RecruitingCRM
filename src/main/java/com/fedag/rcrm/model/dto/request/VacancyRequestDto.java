@@ -18,5 +18,5 @@ public class VacancyRequestDto {
     private String comment;
     private String description;
     private String status;
-
+//
 }

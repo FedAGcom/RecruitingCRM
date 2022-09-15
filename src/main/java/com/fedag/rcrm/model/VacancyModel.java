@@ -37,7 +37,7 @@ public class VacancyModel {
 
     @Column(name = "comment")
     private String comment;
-
+//
     @Column(name = "description")
     private String description;
 

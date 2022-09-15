@@ -18,5 +18,5 @@ public interface VacancyService {
     void deleteById(Long id);
     VacancyResponseDto update(Long id, VacancyRequestUpdateDto vacancyRequestUpdateDto);
     public abstract Page<VacancyResponseDto> findAll(Pageable pageable);
-
+//
 }

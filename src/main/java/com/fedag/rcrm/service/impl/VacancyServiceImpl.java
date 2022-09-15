@@ -36,7 +36,7 @@ public class VacancyServiceImpl implements VacancyService {
         return vacancyMapper.toResponse(vacancyModel);
     }
 
-    @Override
+    @Override//
     public VacancyResponseDto findByTitle(String title) {
         VacancyModel vacancyModel = vacancyRepo.findByTitle(title).orElseThrow(()-> new RuntimeException("Vacancy with title" +
                 title + " not found"));

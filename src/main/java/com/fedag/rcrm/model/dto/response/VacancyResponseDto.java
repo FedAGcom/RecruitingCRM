@@ -24,5 +24,5 @@ public class VacancyResponseDto {
     private boolean active;
     private List<Long> hrsId;
     private List<Long> candidatesId;
-
+//
 }
