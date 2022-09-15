@@ -16,6 +16,7 @@ CREATE TABLE candidate (
     total_rating numeric DEFAULT '0',
     cv_link varchar(256) NOT NULL,
     vacancy_id bigint,
+    delete boolean DEFAULT FALSE,
     FOREIGN KEY (hr_id) REFERENCES hr(id),
     FOREIGN KEY (vacancy_id) REFERENCES vacancy(id)
 );
