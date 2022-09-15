@@ -7,5 +7,6 @@ CREATE TABLE vacancy (
     comment varchar(256),
     description varchar(256) NOT NULL,
     status varchar(64) DEFAULT 'PREPARED',
+    active boolean,
     FOREIGN KEY (status) REFERENCES vacancy_status(status)
 );

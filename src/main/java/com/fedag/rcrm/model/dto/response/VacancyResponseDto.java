@@ -21,6 +21,7 @@ public class VacancyResponseDto {
     private String comment;
     private String description;
     private String status;
+    private boolean active;
     private List<Long> hrsId;
     private List<Long> candidatesId;
 

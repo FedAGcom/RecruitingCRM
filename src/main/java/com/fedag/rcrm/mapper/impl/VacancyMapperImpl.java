@@ -35,6 +35,7 @@ public class VacancyMapperImpl implements VacancyMapper {
                 .setComment(vacancyModel.getComment())
                 .setDescription(vacancyModel.getDescription())
                 .setStatus(vacancyModel.getStatus())
+                .setActive(vacancyModel.isActive())
                 .setHrsId(Optional.ofNullable(vacancyModel.getHrs())
                         .orElseGet(Collections::emptyList)
                         .stream()

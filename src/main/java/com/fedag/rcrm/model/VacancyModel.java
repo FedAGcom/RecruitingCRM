@@ -44,6 +44,9 @@ public class VacancyModel {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "active")
+    private boolean active = true;
+
     @ManyToMany()
     @JoinTable(
             name = "hr_to_vacancy",

@@ -16,7 +16,7 @@ public interface VacancyRepo extends JpaRepository<VacancyModel, Long> {
 
     Optional<VacancyModel> findByTitle(String title);
     @Modifying
-    @Query("UPDATE VacancyModel vacancy SET vacancy.status = 'CLOSE' WHERE vacancy.id = :id")
+    @Query("UPDATE VacancyModel vacancy SET vacancy.status = 'CLOSE', vacancy.active = false WHERE vacancy.id = :id")
     void deleteById(Long id);
 
     /*@Modifying
