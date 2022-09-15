@@ -24,7 +24,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/vacancies")
-@Api(description = "Контроллер для управления вакансиями")
+@Api(value = "Vacancies", tags = "Vacancies API")
 public class VacancyControllerImpl{
 
     private final VacancyService vacancyService;
