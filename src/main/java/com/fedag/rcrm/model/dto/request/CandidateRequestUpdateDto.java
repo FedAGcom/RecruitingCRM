@@ -11,6 +11,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -69,6 +70,9 @@ public class CandidateRequestUpdateDto {
     @Schema(description = "Candidate birthdate - LocalDate.class",
             example = "1990-12-13")
     private LocalDate birthdate;
+
+    @Schema(description = "Candidate creation date - LocalDateTime.class")
+    private LocalDateTime creationDate;
 
     @Schema(description = "Candidate CV URL",
             example = "https:/")

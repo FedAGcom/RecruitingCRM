@@ -55,7 +55,7 @@ public class CandidateMapperImpl implements CandidateMapper {
         dto.setFeedbackId(model
                 .getFeedbacks()
                 .stream()
-                .map(FeedbackModel::getFeedback_id)
+                .map(FeedbackModel::getId)
                 .collect(Collectors.toList()));
         dto.setDelete(model.isDelete());
         return dto;
