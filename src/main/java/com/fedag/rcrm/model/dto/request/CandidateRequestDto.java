@@ -75,8 +75,4 @@ public class CandidateRequestDto {
     @Schema(description = "Candidate CV URL",
             example = "https:/")
     private String cvLink;
-
-    @Schema(description = "Vacancy model")
-    @NotNull
-    private VacancyModel vacancy;
 }

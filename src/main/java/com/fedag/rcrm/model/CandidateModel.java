@@ -68,7 +68,7 @@ public class CandidateModel extends UserModel {
 
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
     @ApiModelProperty(notes = "Provided candidate work experiences ", required =true)
-    private List<ExperienceOfWorkModel> experienceOfWorksList;
+    private List<ExpOfWorkModel> experienceOfWorksList;
 
     @OneToMany(mappedBy = "candidate")
     @ApiModelProperty(notes = "Provided candidate's feedback ", required =true)

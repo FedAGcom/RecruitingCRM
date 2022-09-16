@@ -39,11 +39,11 @@
              'Russia', 'Moscow', 'PHP Developer', 85000, '1990-12-13', '2021-10-22 12:00:00',
              2, 'ACCEPT', 3.0, 'https:/', 2, FALSE);
 
-    INSERT INTO candidate_exp(candidate_id, position, comment, date_start, date_end)
+    INSERT INTO candidate_exp(candidate_id, position, comment, date_start, date_end, delete)
     VALUES
-            (2, 'PHP Developer', 'comment', '2020-01-02', '2021-03-12'),
-            (2, 'HR', 'comment', '2018-01-02', '2019-03-12'),
-            (1, 'QA', 'comment', '2021-12-13', '2022-02-12');
+            (2, 'PHP Developer', 'comment', '2020-01-02', '2021-03-12', false),
+            (2, 'HR', 'comment', '2018-01-02', '2019-03-12', false),
+            (1, 'QA', 'comment', '2021-12-13', '2022-02-12', false);
 
     INSERT INTO feedback(candidate_id, hr_id, rating, comment, created, updated, deleted)
     VALUES
