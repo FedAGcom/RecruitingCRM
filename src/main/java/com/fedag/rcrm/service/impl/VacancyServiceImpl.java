@@ -2,14 +2,10 @@ package com.fedag.rcrm.service.impl;
 
 import com.fedag.rcrm.exception.EntityNotFoundException;
 import com.fedag.rcrm.mapper.impl.VacancyMapperImpl;
-import com.fedag.rcrm.model.CandidateModel;
-import com.fedag.rcrm.model.HRModel;
 import com.fedag.rcrm.model.VacancyModel;
 import com.fedag.rcrm.model.dto.request.VacancyRequestDto;
 import com.fedag.rcrm.model.dto.request.VacancyRequestUpdateDto;
 import com.fedag.rcrm.model.dto.response.VacancyResponseDto;
-import com.fedag.rcrm.repos.CandidateRepo;
-import com.fedag.rcrm.repos.HRRepo;
 import com.fedag.rcrm.repos.VacancyRepo;
 import com.fedag.rcrm.service.VacancyService;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Collections;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

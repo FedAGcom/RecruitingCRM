@@ -44,8 +44,8 @@ public class VacancyModel {
     @Column(name = "status")
     private String status;
 
-    @Column(name = "active")
-    private boolean active = true;
+    @Column(name = "delete")
+    private boolean delete = true;
 
     @ManyToMany()
     @JoinTable(

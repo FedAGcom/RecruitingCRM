@@ -12,10 +12,7 @@ import com.fedag.rcrm.model.dto.response.VacancyResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import java.time.LocalDateTime;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -35,12 +32,12 @@ public class VacancyMapperImpl implements VacancyMapper {
                 .setComment(vacancyModel.getComment())
                 .setDescription(vacancyModel.getDescription())
                 .setStatus(vacancyModel.getStatus())
-                .setActive(vacancyModel.isActive())
+                .setDelete(vacancyModel.isDelete())
                 .setHrsId(Optional.ofNullable(vacancyModel.getHrs())
                         .orElseGet(Collections::emptyList)
                         .stream()
-                        .map(HRModel::getId).
-                        collect(Collectors.toList()))
+                        .map(HRModel::getId)
+                        .collect(Collectors.toList()))
                 .setCandidatesId(Optional.ofNullable(vacancyModel.getCandidates())
                         .orElseGet(Collections::emptyList)
                         .stream()

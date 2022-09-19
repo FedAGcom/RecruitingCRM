@@ -10,11 +10,11 @@
             ('CLOSE'),
             ('ARCHIVE');
 
-    INSERT INTO vacancy(title, position, salary, creation_date, comment, description, status, active)
+    INSERT INTO vacancy(title, position, salary, creation_date, comment, description, status, delete)
     VALUES
-            ('Java Developer', 'Java Developer', 50000, '2021-03-12', 'comment', 'description', 'CLOSE', true),
-            ('PHP Developer', 'PHP Developer', 60000, '2022-09-01', 'comment', 'description', 'OPEN', true),
-            ('Javascript Developer', 'Javascript Developer', 70000, '2022-09-05', 'comment', 'description', 'PREPARED', true);
+            ('Java Developer', 'Java Developer', 50000, '2021-03-12', 'comment', 'description', 'CLOSE', false),
+            ('PHP Developer', 'PHP Developer', 60000, '2022-09-01', 'comment', 'description', 'OPEN', false),
+            ('Javascript Developer', 'Javascript Developer', 70000, '2022-09-05', 'comment', 'description', 'PREPARED', false);
 
 
     INSERT INTO hr(first_name, lastname, login, password, creation_date, active)
