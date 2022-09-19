@@ -82,5 +82,4 @@ public class HRModel extends EmployeeModel {
         this.vacancies.remove(vacancyModel);
         vacancyModel.getHrs().remove(this);
     }
-
 }

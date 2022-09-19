@@ -57,4 +57,9 @@ public class VacancyModel {
 
     @OneToMany(mappedBy = "vacancy")
     private List<CandidateModel> candidates;
+
+    public void addCandidate(CandidateModel candidateModel) {
+        candidateModel.setVacancy(this);
+        candidates.add(candidateModel);
+    }
 }

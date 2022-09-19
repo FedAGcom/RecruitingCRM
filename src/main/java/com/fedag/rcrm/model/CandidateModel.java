@@ -88,4 +88,13 @@ public class CandidateModel extends UserModel {
         feedbacks.add(feedbackModel);
     }
 
+    public void addExpOfWork(ExpOfWorkModel expOfWorkModel) {
+        expOfWorkModel.setCandidate(this);
+        experienceOfWorksList.add(expOfWorkModel);
+    }
+
+    public void addVacancy(VacancyModel vacancyModel) {
+        vacancyModel.addCandidate(this);
+    }
+
 }

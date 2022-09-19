@@ -60,19 +60,6 @@ public class ExpOfWorkMapperImpl implements ExpOfWorkMapper {
         return model;
     }
 
-//    @Override
-//    public ExpOfWorkModel toExpModelUpdate(ExpOfWorkRequestUpdateDto updateDto) {
-//        ExpOfWorkModel model = new ExpOfWorkModel();
-//        CandidateModel candidateModel = candidateRepo.findById(updateDto.getCandidateId()).orElseThrow(() -> new EntityNotFoundException("Candidate", "ID", updateDto.getCandidateId()));
-//        model.setCandidate(candidateModel);
-//        model.setPosition(updateDto.getPosition());
-//        model.setDate_start(updateDto.getDate_start());
-//        model.setDate_end(updateDto.getDate_end());
-//        model.setComment(updateDto.getComment());
-//        model.setDelete(updateDto.isDelete());
-//        return model;
-//    }
-
     @Override
     public ExpOfWorkModel toExpModelUpdate(ExpOfWorkModel source, ExpOfWorkRequestUpdateDto dto, CandidateModel candidate) {
         source.setCandidate(candidate);

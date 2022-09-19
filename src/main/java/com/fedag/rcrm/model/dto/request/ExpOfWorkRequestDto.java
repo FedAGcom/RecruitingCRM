@@ -12,9 +12,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class ExpOfWorkRequestDto {
 
-//    @Schema(description = "Candidate ID", example = "Long - 1")
-//    private Long candidateId;
-
     @Schema(description = "Candidate former position")
     private String position;
 
