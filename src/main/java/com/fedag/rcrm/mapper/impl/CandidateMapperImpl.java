@@ -7,6 +7,7 @@ import com.fedag.rcrm.model.dto.request.CandidateRequestDto;
 import com.fedag.rcrm.model.dto.request.CandidateRequestUpdateDto;
 import com.fedag.rcrm.model.dto.response.CandidateResponseDto;
 import com.fedag.rcrm.repos.HRRepo;
+import com.fedag.rcrm.repos.VacancyRepo;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
 public class CandidateMapperImpl implements CandidateMapper {
     private final ObjectMapper objectMapper;
     private final HRRepo hrRepo;
+    private final VacancyRepo vacancyRepo;
 
     @Override
     public CandidateResponseDto toCandidateResponseDto(CandidateModel model) {
@@ -50,7 +52,7 @@ public class CandidateMapperImpl implements CandidateMapper {
         dto.setTotalRating(model.getTotalRating());
         dto.setExperienceId(model
                 .getExperienceOfWorksList()
-                .stream().map(ExperienceOfWorkModel::getId)
+                .stream().map(ExpOfWorkModel::getId)
                 .collect(Collectors.toList()));
         dto.setFeedbackId(model
                 .getFeedbacks()
@@ -79,7 +81,8 @@ public class CandidateMapperImpl implements CandidateMapper {
         model.setStatus("NEW");
         HRModel hr = hrRepo.findById(1L).orElseThrow(()-> new RuntimeException("Error"));
         model.setHr(hr);
-        model.setVacancy(hr.getVacancies().get(0));
+        VacancyModel vacancyModel = vacancyRepo.findById(vacancyId).orElseThrow(() -> new RuntimeException("Vacancy ID not found in candidate mapper"));
+        model.setVacancy(vacancyModel);
         model.setExperienceOfWorksList(new LinkedList<>());
         model.setFeedbacks(new LinkedList<>());
         return model;

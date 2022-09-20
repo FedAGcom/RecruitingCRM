@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "candidate_exp")
-public class ExperienceOfWorkModel {
+public class ExpOfWorkModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,4 +36,7 @@ public class ExperienceOfWorkModel {
 
     @Column(name = "comment")
     private String comment;
+
+    @Column(name = "delete")
+    boolean delete;
 }

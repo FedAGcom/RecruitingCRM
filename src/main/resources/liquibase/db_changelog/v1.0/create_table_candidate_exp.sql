@@ -5,6 +5,7 @@ CREATE TABLE candidate_exp(
     comment varchar(256),
     date_start DATE,
     date_end DATE,
+    delete boolean DEFAULT FALSE,
     FOREIGN KEY (candidate_id) REFERENCES candidate(id)
 );
 

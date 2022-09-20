@@ -37,12 +37,15 @@ public class VacancyModel {
 
     @Column(name = "comment")
     private String comment;
-
+//
     @Column(name = "description")
     private String description;
 
     @Column(name = "status")
     private String status;
+
+    @Column(name = "delete")
+    private boolean delete = true;
 
     @ManyToMany()
     @JoinTable(
@@ -54,4 +57,9 @@ public class VacancyModel {
 
     @OneToMany(mappedBy = "vacancy")
     private List<CandidateModel> candidates;
+
+    public void addCandidate(CandidateModel candidateModel) {
+        candidateModel.setVacancy(this);
+        candidates.add(candidateModel);
+    }
 }

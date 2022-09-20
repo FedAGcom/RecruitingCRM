@@ -68,7 +68,7 @@ public class CandidateModel extends UserModel {
 
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
     @ApiModelProperty(notes = "Provided candidate work experiences ", required =true)
-    private List<ExperienceOfWorkModel> experienceOfWorksList;
+    private List<ExpOfWorkModel> experienceOfWorksList;
 
     @OneToMany(mappedBy = "candidate")
     @ApiModelProperty(notes = "Provided candidate's feedback ", required =true)
@@ -86,6 +86,15 @@ public class CandidateModel extends UserModel {
     public void addFeedback(FeedbackModel feedbackModel) {
         feedbackModel.setCandidate(this);
         feedbacks.add(feedbackModel);
+    }
+
+    public void addExpOfWork(ExpOfWorkModel expOfWorkModel) {
+        expOfWorkModel.setCandidate(this);
+        experienceOfWorksList.add(expOfWorkModel);
+    }
+
+    public void addVacancy(VacancyModel vacancyModel) {
+        vacancyModel.addCandidate(this);
     }
 
 }

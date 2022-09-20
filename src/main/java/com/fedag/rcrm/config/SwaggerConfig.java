@@ -27,10 +27,10 @@ public class SwaggerConfig {
         Contact contact = new Contact("HR CRM", "fedag.com", "fedag@fedag.fedag");
         return new ApiInfoBuilder()
                 .title("HR CRM API")
-                .description("???description")
+                .description("REST API для RECRUITING CRM")
                 .version("1.0.0")
-                .license("??? license")
-                .licenseUrl("???licenseUrl")
+                .license("Some license")
+                .licenseUrl("https://fedag.com/license")
                 .contact(contact)
                 .build();
     }

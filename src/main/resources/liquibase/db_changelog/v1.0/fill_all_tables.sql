@@ -10,11 +10,11 @@
             ('CLOSE'),
             ('ARCHIVE');
 
-    INSERT INTO vacancy(title, position, salary, creation_date, comment, description, status)
+    INSERT INTO vacancy(title, position, salary, creation_date, comment, description, status, delete)
     VALUES
-            ('Java Developer', 'Java Developer', 50000, '2021-03-12', 'comment', 'description', 'CLOSE'),
-            ('PHP Developer', 'PHP Developer', 60000, '2022-09-01', 'comment', 'description', 'OPEN'),
-            ('Javascript Developer', 'Javascript Developer', 70000, '2022-09-05', 'comment', 'description', 'PREPARED');
+            ('Java Developer', 'Java Developer', 50000, '2021-03-12', 'comment', 'description', 'CLOSE', false),
+            ('PHP Developer', 'PHP Developer', 60000, '2022-09-01', 'comment', 'description', 'OPEN', false),
+            ('Javascript Developer', 'Javascript Developer', 70000, '2022-09-05', 'comment', 'description', 'PREPARED', false);
 
 
     INSERT INTO hr(first_name, lastname, login, password, creation_date, active)
@@ -39,11 +39,11 @@
              'Russia', 'Moscow', 'PHP Developer', 85000, '1990-12-13', '2021-10-22 12:00:00',
              2, 'ACCEPT', 3.0, 'https:/', 2, FALSE);
 
-    INSERT INTO candidate_exp(candidate_id, position, comment, date_start, date_end)
+    INSERT INTO candidate_exp(candidate_id, position, comment, date_start, date_end, delete)
     VALUES
-            (2, 'PHP Developer', 'comment', '2020-01-02', '2021-03-12'),
-            (2, 'HR', 'comment', '2018-01-02', '2019-03-12'),
-            (1, 'QA', 'comment', '2021-12-13', '2022-02-12');
+            (2, 'PHP Developer', 'comment', '2020-01-02', '2021-03-12', false),
+            (2, 'HR', 'comment', '2018-01-02', '2019-03-12', false),
+            (1, 'QA', 'comment', '2021-12-13', '2022-02-12', false);
 
     INSERT INTO feedback(candidate_id, hr_id, rating, comment, created, updated, deleted)
     VALUES

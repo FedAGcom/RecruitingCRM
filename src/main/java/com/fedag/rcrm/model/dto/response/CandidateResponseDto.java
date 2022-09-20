@@ -62,7 +62,7 @@ public class CandidateResponseDto extends UserModel {
 
     @Schema(description = "Candidate exp ID list",
             example = "[1, 2, 3]")
-    private List<Long> experienceId; // передавать лист ExpResponseDto
+    private List<Long> experienceId; // передавать лист ExpOfWorkResponseDto
 
     @Schema(description = "Candidate feedbacks ID",
             example = "[1, 2, 3]")
