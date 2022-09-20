@@ -4,6 +4,7 @@ import com.fedag.rcrm.model.dto.request.HRRequestDto;
 import com.fedag.rcrm.model.dto.request.HRRequestUpdateDto;
 import com.fedag.rcrm.model.dto.response.HRResponseDto;
 import com.fedag.rcrm.service.impl.HRServiceImpl;
+import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -23,7 +24,7 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/hrs")
-@Tag(name = "HR", description = "Работа с HR")
+@Api(value = "HR", tags = "HR API")
 public class HrControllerImpl {
     private final HRServiceImpl hrService;
 

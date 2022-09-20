@@ -17,6 +17,7 @@ public interface FeedbackRepo extends JpaRepository<FeedbackModel, Long> {
     @Query("UPDATE FeedbackModel feedback SET feedback.deleted = true WHERE feedback.id = :id")
     void deleteById(Long id);
 
+    Page<FeedbackModel> findAll(Pageable pageable);
     Page<FeedbackModel> findAllByDeletedFalse(Pageable pageable);
 
 }

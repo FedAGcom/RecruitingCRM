@@ -49,26 +49,6 @@ public class HRMapperImpl implements HRMapper {
                     .collect(Collectors.toList()));
         }
         return responseDto;
-
-        /*return new HRResponseDto()
-                .setId(hrModel.getId())
-                .setFirstName(hrModel.getFirstName())
-                .setLastname(hrModel.getLastname())
-                .setLogin(hrModel.getLogin())
-                .setRoles(hrModel.getRoles()
-                        .stream()
-                        .map(Role::name)
-                        .collect(Collectors.toList()))
-                .setCreationDate(hrModel.getCreationDate())
-                .setEnabled(hrModel.isEnabled())
-                .setCandidatesId(hrModel.getCandidates()
-                        .stream()
-                        .map(CandidateModel::getId)
-                        .collect(Collectors.toList()))
-                .setVacanciesId(hrModel.getVacancies()
-                        .stream()
-                        .map(VacancyModel::getId)
-                        .collect(Collectors.toList()));*/
     }
 
     @Override
@@ -82,16 +62,10 @@ public class HRMapperImpl implements HRMapper {
     }
 
     @Override
-    public HRModel merge(HRModel source, HRModel target) {
-        if(source.getFirstName()!=null){
-            target.setFirstName(source.getFirstName());
-        }
-        if(source.getLastname()!=null){
-            target.setLastname(source.getLastname());
-        }
-        if(source.getLogin()!=null){
-            target.setLogin(source.getLogin());
-        }
+    public HRModel toUpdateModel(HRModel source, HRModel target) {
+        target.setFirstName(source.getFirstName());
+        target.setLastname(source.getLastname());
+        target.setLogin(source.getLogin());
         return target;
     }
 }

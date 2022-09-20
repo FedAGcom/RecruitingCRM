@@ -36,7 +36,7 @@ public class HRRequestDto {
     private String lastname;
 
     @Schema(description = "Роль HR",
-            example = "USER")
+            example = "[USER]")
     @NotNull
     private Set<Role> roles;
 

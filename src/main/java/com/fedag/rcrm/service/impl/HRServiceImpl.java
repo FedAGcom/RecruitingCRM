@@ -16,10 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-
-import static com.fedag.rcrm.enums.Role.*;
-
 @Service
 @RequiredArgsConstructor
 public class HRServiceImpl implements HRService {
@@ -40,7 +36,7 @@ public class HRServiceImpl implements HRService {
 
     @Override
     public Page<HRResponseDto> findAll(Pageable pageable) {
-        return hrRepo.findAllByActiveTrue(pageable).map(hrMapper::toResponse);
+        return hrRepo.findAll(pageable).map(hrMapper::toResponse);
     }
 
     @Transactional
@@ -54,11 +50,13 @@ public class HRServiceImpl implements HRService {
     @Override
     public HRResponseDto update(Long id, HRRequestUpdateDto hrRequestUpdateDto) {
         HRModel hr = hrMapper.fromRequestUpdate(hrRequestUpdateDto);
-        if (hrRepo.findByLogin(hr.getLogin()).isPresent()) {
-            throw new EntityAlreadyExistsException("HR", "login", hr.getLogin());
-        }
         HRModel target = hrRepo.findById(id).orElseThrow(()->new EntityNotFoundException("HR", "ID", id));
-        HRModel update = hrMapper.merge(hr, target);
+        if (!hr.getLogin().equals(target.getLogin())){
+            if (hrRepo.findByLogin(hr.getLogin()).isPresent()) {
+                throw new EntityAlreadyExistsException("HR", "login", hr.getLogin());
+            }
+        }
+        HRModel update = hrMapper.toUpdateModel(hr, target);
         return hrMapper.toResponse(hrRepo.save(update));
     }
 

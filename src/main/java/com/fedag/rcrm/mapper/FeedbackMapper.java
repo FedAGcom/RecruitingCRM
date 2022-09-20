@@ -10,5 +10,5 @@ public interface FeedbackMapper {
     FeedbackResponseDto toResponse(FeedbackModel feedbackModel);
     FeedbackModel fromRequest(FeedbackRequestDto feedbackRequestDto);
     FeedbackModel fromRequestUpdate(FeedbackRequestUpdateDto feedbackRequestUpdateDto);
-    FeedbackModel merge(FeedbackModel source, FeedbackModel target);
+    FeedbackModel toUpdateModel(FeedbackModel source, FeedbackModel target);
 }

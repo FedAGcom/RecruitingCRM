@@ -2,9 +2,7 @@ package com.fedag.rcrm.service.impl;
 
 import com.fedag.rcrm.exception.EntityNotFoundException;
 import com.fedag.rcrm.mapper.FeedbackMapper;
-import com.fedag.rcrm.model.CandidateModel;
 import com.fedag.rcrm.model.FeedbackModel;
-import com.fedag.rcrm.model.HRModel;
 import com.fedag.rcrm.model.dto.request.FeedbackRequestDto;
 import com.fedag.rcrm.model.dto.request.FeedbackRequestUpdateDto;
 import com.fedag.rcrm.model.dto.response.FeedbackResponseDto;
@@ -33,7 +31,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public Page<FeedbackResponseDto> findAll(Pageable pageable) {
-        return feedbackRepo.findAllByDeletedFalse(pageable).map(feedbackMapper::toResponse);
+        return feedbackRepo.findAll(pageable).map(feedbackMapper::toResponse);
     }
 
     @Transactional
@@ -60,10 +58,9 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Transactional
     @Override
     public FeedbackResponseDto update(Long id, FeedbackRequestUpdateDto feedbackRequestUpdateDto) {
-        FeedbackModel feedback = feedbackMapper.fromRequestUpdate(feedbackRequestUpdateDto);
-        FeedbackModel target = feedbackRepo.findById(id).orElseThrow(()->new EntityNotFoundException("Feedback", "ID", id));
-        target.setRating(5);
-        //FeedbackModel update = feedbackMapper.merge(feedback, target);
-        return feedbackMapper.toResponse(feedbackRepo.save(target));
+        FeedbackModel updateModel = feedbackMapper.fromRequestUpdate(feedbackRequestUpdateDto);
+        FeedbackModel modelFromBD= feedbackRepo.findById(id).orElseThrow(()->new EntityNotFoundException("Feedback", "ID", id));
+        FeedbackModel update = feedbackMapper.toUpdateModel(updateModel, modelFromBD);
+        return feedbackMapper.toResponse(feedbackRepo.save(update));
     }
 }

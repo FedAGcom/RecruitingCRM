@@ -21,7 +21,7 @@ public interface HRRepo extends JpaRepository<HRModel, Long> {
     void deleteById(Long id);
 
     Page<HRModel> findAllByRolesContainsAndActiveTrue(Role role, Pageable pageable);
-    Page<HRModel> findAllByActiveTrue(Pageable pageable);
+    Page<HRModel> findAll(Pageable pageable);
 
 
 }

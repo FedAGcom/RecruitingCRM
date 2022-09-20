@@ -4,6 +4,7 @@ import com.fedag.rcrm.model.dto.request.FeedbackRequestDto;
 import com.fedag.rcrm.model.dto.request.FeedbackRequestUpdateDto;
 import com.fedag.rcrm.model.dto.response.FeedbackResponseDto;
 import com.fedag.rcrm.service.FeedbackService;
+import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -21,6 +22,7 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/feedbacks")
+@Api(value = "Feedback", tags = "Feedback API")
 public class FeedbackControllerImpl {
     private final FeedbackService feedbackService;
 

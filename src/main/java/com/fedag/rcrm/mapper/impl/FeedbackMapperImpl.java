@@ -9,6 +9,8 @@ import com.fedag.rcrm.model.dto.response.FeedbackResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 @RequiredArgsConstructor
 public class FeedbackMapperImpl implements FeedbackMapper {
@@ -38,13 +40,10 @@ public class FeedbackMapperImpl implements FeedbackMapper {
     }
 
     @Override
-    public FeedbackModel merge(FeedbackModel source, FeedbackModel target) {
-        if (source.getRating()!= 0){
-            target.setRating(source.getRating());
-        }
-        if(source.getComment()!=null){
-            target.setComment(source.getComment());
-        }
+    public FeedbackModel toUpdateModel(FeedbackModel source, FeedbackModel target) {
+        target.setRating(source.getRating());
+        target.setComment(source.getComment());
+        target.setUpdated(LocalDateTime.now());
         return target;
     }
 }
