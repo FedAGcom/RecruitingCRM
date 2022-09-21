@@ -10,11 +10,13 @@ import com.fedag.rcrm.repos.CandidateRepo;
 import com.fedag.rcrm.repos.FeedbackRepo;
 import com.fedag.rcrm.service.FeedbackService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class FeedbackServiceImpl implements FeedbackService {
@@ -24,14 +26,20 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public FeedbackResponseDto findById(Long id) {
+        log.info("Поиск отзыва с Id: {}", id);
         FeedbackModel feedbackModel = feedbackRepo.findById(id)
                 .orElseThrow(()->new EntityNotFoundException("Feedback", "id", id));
-        return feedbackMapper.toResponse(feedbackModel);
+        FeedbackResponseDto result = feedbackMapper.toResponse(feedbackModel);
+        log.info("Отзыв с Id: {} найден", id);
+        return result;
     }
 
     @Override
     public Page<FeedbackResponseDto> findAll(Pageable pageable) {
-        return feedbackRepo.findAll(pageable).map(feedbackMapper::toResponse);
+        log.info("Получение страницы с отзывами");
+        Page<FeedbackResponseDto> result = feedbackRepo.findAll(pageable).map(feedbackMapper::toResponse);
+        log.info("Страница с отзывами получена");
+        return result;
     }
 
     @Transactional
@@ -51,16 +59,21 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Transactional
     @Override
     public void deleteById(Long id) {
+        log.info("Удаление отзыва с Id: {}", id);
         this.findById(id);
         feedbackRepo.deleteById(id);
+        log.info("Отзыв с Id: {} удален", id);
     }
 
     @Transactional
     @Override
     public FeedbackResponseDto update(Long id, FeedbackRequestUpdateDto feedbackRequestUpdateDto) {
+        log.info("Обновление отзыва с Id: {}", id);
         FeedbackModel updateModel = feedbackMapper.fromRequestUpdate(feedbackRequestUpdateDto);
         FeedbackModel modelFromBD= feedbackRepo.findById(id).orElseThrow(()->new EntityNotFoundException("Feedback", "ID", id));
         FeedbackModel update = feedbackMapper.toUpdateModel(updateModel, modelFromBD);
-        return feedbackMapper.toResponse(feedbackRepo.save(update));
+        FeedbackResponseDto result = feedbackMapper.toResponse(feedbackRepo.save(update));
+        log.info("Отзыв с Id: {} обновлен", id);
+        return result;
     }
 }

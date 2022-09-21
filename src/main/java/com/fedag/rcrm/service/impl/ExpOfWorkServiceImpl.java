@@ -11,12 +11,14 @@ import com.fedag.rcrm.repos.CandidateRepo;
 import com.fedag.rcrm.repos.ExpOfWorkRepo;
 import com.fedag.rcrm.service.ExpOfWorkService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ExpOfWorkServiceImpl implements ExpOfWorkService {
@@ -27,43 +29,60 @@ public class ExpOfWorkServiceImpl implements ExpOfWorkService {
 
     @Override
     public ExpOfWorkResponseDto getCandidateExperienceByExpId(Long expId) {
+        log.info("Получение опыта кандидата с Id: {}", expId);
         ExpOfWorkModel model = expRepo.findById(expId).orElseThrow(() -> new EntityNotFoundException("Experience of work", "ID", expId));
-        return expMapper.toExpResponseDto(model);
+        ExpOfWorkResponseDto result = expMapper.toExpResponseDto(model);
+        log.info("Опыт кандидата с Id: {} получен", expId);
+        return result;
     }
 
     @Override
     public Page<ExpOfWorkResponseDto> getAllCandidateExperience(Pageable pageable, Long candidateId) {
-        return expRepo.findAllByDeleteFalse(pageable).map(expMapper::toExpResponseDto);
+        log.info("Получение страницы с опытом кандидата");
+        Page<ExpOfWorkResponseDto> result = expRepo.findAllByDeleteFalse(pageable).map(expMapper::toExpResponseDto);
+        log.info("Страница с опытом кандидата получена");
+        return result;
     }
 
     @Override
     @Transactional
     public ExpOfWorkResponseDto addExpOfWork(ExpOfWorkRequestDto request, Long candidateId) {
+        log.info("Добавление опыта работы кандидату с Id: {}", candidateId);
         ExpOfWorkModel model = expMapper.toExpModelRequest(request, candidateId);
-        return expMapper.toExpResponseDto(expRepo.save(model));
+        ExpOfWorkResponseDto result = expMapper.toExpResponseDto(expRepo.save(model));
+        log.info("Опыт работы кандидату с Id: {} добавлен", candidateId);
+        return result;
     }
 
     @Override
     @Transactional
     public ExpOfWorkResponseDto updateExpOfWork(ExpOfWorkRequestUpdateDto requestUpdate, Long id) {
+        log.info("Обновление опыта работы с Id: {}", id);
         ExpOfWorkModel model = expRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("Exp of work", "ID", id));
-        CandidateModel candidateModel = candidateRepo.findById(requestUpdate.getCandidateId()).orElseThrow(() -> new EntityNotFoundException("Candidate", "ID", requestUpdate.getCandidateId()));
-        return expMapper.toExpResponseDto(expMapper.toExpModelUpdate(model, requestUpdate, candidateModel));
+        CandidateModel candidateModel = candidateRepo.findById(requestUpdate.getCandidateId())
+                                                     .orElseThrow(() -> new EntityNotFoundException("Candidate", "ID", requestUpdate.getCandidateId()));
+        ExpOfWorkResponseDto result = expMapper.toExpResponseDto(expMapper.toExpModelUpdate(model, requestUpdate, candidateModel));
+        log.info("Опыт работы с Id: {} обновлен", id);
+        return result;
     }
 
     @Override
     @Transactional
     public void deleteExpOfWorkById(Long expId) {
+        log.info("Удаление опыта с Id: {}", expId);
         ExpOfWorkModel model = expRepo.findById(expId).orElseThrow(() -> new EntityNotFoundException("Exp", "ID", expId));
         model.setDelete(true);
+        log.info("Опыт работы с Id: {} удален", expId);
     }
 
     @Override
     @Transactional
     public void deleteAllCandidateExp(Long candidateId) {
+        log.info("Удаление всего опыта кандидата с Id: {}", candidateId);
         CandidateModel model = candidateRepo.findById(candidateId).orElseThrow(() -> new EntityNotFoundException("Candidate", "ID", candidateId));
         for (ExpOfWorkModel exp : model.getExperienceOfWorksList()) {
             exp.setDelete(true);
         }
+        log.info("Весь опыт кандидата с Id: {} удален", candidateId);
     }
 }
