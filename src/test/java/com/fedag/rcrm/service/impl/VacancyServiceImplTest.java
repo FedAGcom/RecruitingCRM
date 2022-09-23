@@ -47,7 +47,6 @@ class VacancyServiceImplTest {
         assertThrows(EntityNotFoundException.class,  () -> vacancyService.findById(invalidId));
         when(vacancyRepo.findById(anyLong())).thenReturn(Optional.of(new VacancyModel()));
         assertDoesNotThrow(() -> vacancyService.findById(validId));
-
     }
 
     @Test
@@ -96,7 +95,6 @@ class VacancyServiceImplTest {
         when(vacancyMapper.toResponse(vacancyModel)).thenReturn(new VacancyResponseDto());
         vacancyService.update(anyLong(), vacancyRequestUpdateDto);
         verify(vacancyRepo).findById(anyLong());
-
     }
 
     @Test

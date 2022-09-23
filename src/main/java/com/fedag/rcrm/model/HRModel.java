@@ -18,7 +18,10 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "hr")
+@Table(name = "hr",
+uniqueConstraints = {
+        @UniqueConstraint(columnNames = "login")
+})
 public class HRModel extends EmployeeModel {
 
     @Column(name = "login")
@@ -27,11 +30,16 @@ public class HRModel extends EmployeeModel {
     @Column(name = "password")
     private char[] password;
 
-    @ElementCollection(targetClass = Role.class)
-    @CollectionTable(name = "hr_to_role", joinColumns = @JoinColumn(name = "hr_id"))
-    @Enumerated(value = EnumType.STRING)
-    @Column(name = "role")
-    private Set<Role> roles;
+//    @ElementCollection(targetClass = Role.class)
+//    @CollectionTable(name = "hr_to_role", joinColumns = @JoinColumn(name = "hr_id"))
+//    @Enumerated(value = EnumType.STRING)
+//    @Column(name = "role")
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+                        joinColumns = @JoinColumn(name = "user_id"),
+                        inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<UserRoleModel> roles;
 
     @CreationTimestamp
     @Column(name = "creation_date")

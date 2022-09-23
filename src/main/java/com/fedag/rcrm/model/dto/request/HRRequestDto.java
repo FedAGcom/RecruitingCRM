@@ -14,6 +14,8 @@ import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Set;
 
+
+// SignupRequest
 @Getter
 @Setter
 @NoArgsConstructor
@@ -38,7 +40,7 @@ public class HRRequestDto {
     @Schema(description = "Роль HR",
             example = "[USER]")
     @NotNull
-    private Set<Role> roles;
+    private Set<String> roles;
 
     @Schema(description = "Email HR",
             maxLength = 255,
