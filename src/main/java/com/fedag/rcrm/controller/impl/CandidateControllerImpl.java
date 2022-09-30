@@ -54,6 +54,11 @@ public class CandidateControllerImpl{
 
     }
 
+    // getCandidateByHrId
+
+    // getCandidateByRaiting - в обе стороны
+    // getCandidateByName - в обе стороны
+
     @GetMapping(value = "/status/{status}")
     @ApiOperation("Получение списка всех кандидатов с фильтром по текущему статусу")
     public ResponseEntity<Page<CandidateResponseDto>> getAllCandidateWithStatus(

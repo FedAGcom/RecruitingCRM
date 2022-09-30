@@ -7,6 +7,7 @@
 
 <!--    <include file="db_changelog/v1.0/create_enum_types.sql" relativeToChangelogFile="true"/>-->
     <include file="db_changelog/v1.0/create_table_vacancy_status.sql" relativeToChangelogFile="true"/>
+<!--    <include file="db_changelog/v1.0/create_table_user_role_model.sql" relativeToChangelogFile="true"/>-->
     <include file="db_changelog/v1.0/create_table_role.sql" relativeToChangelogFile="true"/>
     <include file="db_changelog/v1.0/create_table_candidate_status.sql" relativeToChangelogFile="true"/>
     <include file="db_changelog/v1.0/create_table_vacancy.sql" relativeToChangelogFile="true"/>
@@ -15,9 +16,6 @@
     <include file="db_changelog/v1.0/create_table_candidate_exp.sql" relativeToChangelogFile="true"/>
     <include file="db_changelog/v1.0/create_table_feedback.sql" relativeToChangelogFile="true"/>
     <include file="db_changelog/v1.0/create_table_hr_to_vacancy.sql" relativeToChangelogFile="true"/>
-    <include file="db_changelog/v1.0/create_table_hr_to_role.sql" relativeToChangelogFile="true"/>
-
+<!--    <include file="db_changelog/v1.0/create_table_hr_to_urm.sql" relativeToChangelogFile="true"/>-->
     <include file="db_changelog/v1.0/fill_all_tables.sql" relativeToChangelogFile="true"/>
-
-
 </databaseChangeLog>

@@ -31,8 +31,8 @@ public class HRResponseDto {
             example = "hr@yandex.ru")
     private String login;
 
-    @Schema(description = "Роли HR", example = "[USER]")
-    private List<String> roles;
+    @Schema(description = "Роли HR", example = "USER")
+    private String role;
 
     @Schema(description = "Дата создания HR", example = "2022-03-03")
     private LocalDateTime creationDate;

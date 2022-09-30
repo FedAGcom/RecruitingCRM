@@ -1,11 +1,9 @@
 package com.fedag.rcrm.model.dto.security;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-public class UserLoginRequestDto {
+@Data
+public class LoginRequestDto {
     private String login;
     private String password;
 }

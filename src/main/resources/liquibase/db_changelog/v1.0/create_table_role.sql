@@ -1,3 +1,3 @@
-CREATE TABLE role(
+CREATE TABLE role (
     role VARCHAR(64) PRIMARY KEY
-);
+)

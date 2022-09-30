@@ -93,7 +93,7 @@ public class HRServiceImpl implements HRService {
     @Override
     public Page<HRResponseDto> findAllByRole(String role, Pageable pageable) {
         log.info("Получение страницы с HR с ролью: {}", role);
-        Page<HRResponseDto> result = hrRepo.findAllByRolesContainsAndActiveTrue(Role.valueOf(role.toUpperCase()), pageable)
+        Page<HRResponseDto> result = hrRepo.findAllByRoleAndActiveTrue(Role.valueOf(role.toUpperCase()), pageable)
                 .map(hrMapper::toResponse);
         log.info("Страница с HR с ролью: {} получена", role);
         return result;

@@ -20,4 +20,6 @@ public interface CandidateRepo extends JpaRepository<CandidateModel, Long> {
     void deleteCandidate(Long id);
 
     Page<CandidateModel> findAllByStatus(String status, Pageable pageable);
+
+//    Optional<CandidateModel> findCandidateModelsByFirstNameOrderByFirstName();
 }

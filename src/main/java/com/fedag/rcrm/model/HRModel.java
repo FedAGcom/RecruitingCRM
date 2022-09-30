@@ -1,6 +1,7 @@
 package com.fedag.rcrm.model;
 
 import com.fedag.rcrm.enums.Role;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,9 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -19,8 +22,8 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "hr",
-uniqueConstraints = {
-        @UniqueConstraint(columnNames = "login")
+    uniqueConstraints = {
+            @UniqueConstraint(columnNames = "login")
 })
 public class HRModel extends EmployeeModel {
 
@@ -30,16 +33,15 @@ public class HRModel extends EmployeeModel {
     @Column(name = "password")
     private char[] password;
 
-//    @ElementCollection(targetClass = Role.class)
-//    @CollectionTable(name = "hr_to_role", joinColumns = @JoinColumn(name = "hr_id"))
-//    @Enumerated(value = EnumType.STRING)
-//    @Column(name = "role")
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name = "hr_to_urm",
+//            joinColumns = @JoinColumn(name = "hr_id"),
+//            inverseJoinColumns = @JoinColumn(name = "role"))
+//    private Set<UserRoleModel> roles = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles",
-                        joinColumns = @JoinColumn(name = "user_id"),
-                        inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<UserRoleModel> roles;
+    @Column(name = "role")
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
 
     @CreationTimestamp
     @Column(name = "creation_date")

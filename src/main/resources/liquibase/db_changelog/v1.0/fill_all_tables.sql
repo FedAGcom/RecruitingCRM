@@ -1,7 +1,9 @@
-    INSERT INTO role(role)
+    INSERT INTO role (role)
     VALUES
             ('USER'),
-            ('ADMIN');
+            ('ADMIN'),
+            ('USER_INACTIVE'),
+            ('ADMIN_INACTIVE');
 
     INSERT INTO vacancy_status(status)
     VALUES
@@ -17,12 +19,12 @@
             ('Javascript Developer', 'Javascript Developer', 70000, '2022-09-05', 'comment', 'description', 'PREPARED', false);
 
 
-    INSERT INTO hr(first_name, lastname, login, password, creation_date, active)
+    INSERT INTO hr(first_name, lastname, login, password, role, creation_date, active)
     VALUES
-           ('Ivan', 'Ivanov', 'ivani@yandex.ru', '1234',  '2020-10-27 02:00:00', true),
-           ('Aleksandr', 'Sidorov', 'alexs@yandex.ru', '2425',  '2021-11-13 02:00:00', true),
-           ('Dmitry', 'Androsov', 'da@yandex.ru', 'user',  '2020-08-21 02:00:00', true),
-           ('Ivan', 'Petrov', 'ivanp@yandex.ru', '21646',  '2021-10-15 02:00:00', true);
+           ('Ivan', 'Ivanov', 'ivani@yandex.ru', '$2y$10$kIThCfP4phXKomRPQ6eZT.yCQAeWAGycIcSmdVZ/4Mf/U.EGeTDNW', 'USER', '2020-10-27 02:00:00', true),
+           ('Aleksandr', 'Sidorov', 'alexs@yandex.ru', '2425', 'USER',  '2021-11-13 02:00:00', true),
+           ('Dmitry', 'Androsov', 'da@yandex.ru', 'user', 'ADMIN', '2020-08-21 02:00:00', true),
+           ('Ivan', 'Petrov', 'ivanp@yandex.ru', '21646', 'ADMIN', '2021-10-15 02:00:00', true);
 
 
     INSERT INTO candidate(first_name, lastname, phone_number, email, residence,
@@ -61,13 +63,13 @@
             (3, 3),
             (4, 3);
 
-    INSERT INTO hr_to_role(hr_id, role)
-    VALUES
-            (1, 'ADMIN'),
-            (2, 'ADMIN'),
-            (3, 'USER'),
-            (4, 'USER'),
-            (1, 'USER');
+--     INSERT INTO hr_to_urm(hr_id, role)
+--     VALUES
+--             (1, 'ADMIN'),
+--             (2, 'ADMIN'),
+--             (3, 'USER'),
+--             (4, 'USER'),
+--             (1, 'USER');
 
     INSERT INTO candidate_status(status)
     VALUES

@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -22,7 +23,6 @@ public class HrDetailsImpl implements UserDetails {
 
     @JsonIgnore
     private String password;
-
     private Collection<? extends GrantedAuthority> authorities;
 
     public HrDetailsImpl(Long id, String login, String password, Collection<? extends GrantedAuthority> authorities) {
@@ -36,15 +36,19 @@ public class HrDetailsImpl implements UserDetails {
     }
 
     public static HrDetailsImpl build(HRModel model) {
-        List<GrantedAuthority> authorities = model.getRoles()
-                .stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
-                .collect(Collectors.toList());
-
         HrDetailsImpl details = new HrDetailsImpl();
+//        List<GrantedAuthority> authorities = model.getRoles()
+//                .stream()
+//                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
+//                .collect(Collectors.toList());
+
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(model.getRole().getName()));
+
+
         details.setId(model.getId());
         details.setLogin(model.getLogin());
-        details.setPassword(String.valueOf(model.getPassword())); // todo
+        details.setPassword(String.valueOf(model.getPassword()));
         details.setAuthorities(authorities);
         return details;
     }
@@ -52,6 +56,10 @@ public class HrDetailsImpl implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override

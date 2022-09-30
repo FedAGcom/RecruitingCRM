@@ -5,6 +5,7 @@ import com.fedag.rcrm.enums.Role;
 import com.fedag.rcrm.mapper.HRMapper;
 import com.fedag.rcrm.model.CandidateModel;
 import com.fedag.rcrm.model.HRModel;
+import com.fedag.rcrm.model.UserRoleModel;
 import com.fedag.rcrm.model.VacancyModel;
 import com.fedag.rcrm.model.dto.request.HRRequestDto;
 import com.fedag.rcrm.model.dto.request.HRRequestUpdateDto;
@@ -12,6 +13,7 @@ import com.fedag.rcrm.model.dto.response.HRResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,12 +30,13 @@ public class HRMapperImpl implements HRMapper {
         responseDto.setFirstName(hrModel.getFirstName());
         responseDto.setLastname(hrModel.getLastname());
         responseDto.setLogin(hrModel.getLogin());
-        if (hrModel.getRoles()!=  null){
-            responseDto.setRoles(hrModel.getRoles()
-                    .stream()
-                    .map(Role::name)
-                    .collect(Collectors.toList()));
-        }
+//        if (hrModel.getRoles()!=  null){
+//            responseDto.setRoles(hrModel.getRoles()
+//                    .stream()
+//                    .map((UserRoleModel t) -> t.getName().name())
+//                    .collect(Collectors.toList()));
+//        }
+        responseDto.setRole(hrModel.getRole().getName());
         responseDto.setCreationDate(hrModel.getCreationDate());
         responseDto.setActive(hrModel.isActive());
         if (hrModel.getCandidates() !=null){
@@ -53,7 +56,30 @@ public class HRMapperImpl implements HRMapper {
 
     @Override
     public HRModel fromRequest(HRRequestDto hrRequestDto) {
-        return objectMapper.convertValue(hrRequestDto, HRModel.class);
+
+        HRModel hrModel = new HRModel();
+        hrModel.setFirstName(hrRequestDto.getFirstName());
+        hrModel.setLastname(hrRequestDto.getLastname());
+
+        hrModel.setLogin(hrRequestDto.getLogin());
+        hrModel.setPassword(hrModel.getPassword());
+
+        Set<UserRoleModel> userRoleModelSet = new HashSet<>();
+
+//        for (String role : hrRequestDto.getRoles()) {
+//            if (role.equals("USER")) {
+//                userRoleModelSet.add(new UserRoleModel(Role.USER));
+//            }
+//            if (role.equals("ADMIN")) {
+//                userRoleModelSet.add(new UserRoleModel(Role.ADMIN));
+//            }
+//        }
+        hrModel.setRole(Role.valueOf(hrRequestDto.getRole()));
+        hrModel.setLogin(hrModel.getLogin());
+        hrModel.setPassword(hrModel.getPassword());
+
+//        return objectMapper.convertValue(hrRequestDto, HRModel.class);
+        return hrModel;
     }
 
     @Override

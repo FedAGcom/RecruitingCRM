@@ -6,21 +6,22 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "roles")
-@Getter
-@Setter
+//@Entity
+//@Table(name = "roles")
+//@Getter
+//@Setter
 public class UserRoleModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+////    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
+    @Id
     @Enumerated(EnumType.STRING)
     private Role name;
 
-    public UserRoleModel() {
+    public UserRoleModel() {}
+
+    public UserRoleModel(Role name) {
+        this.name = name;
     }
-
-
 }

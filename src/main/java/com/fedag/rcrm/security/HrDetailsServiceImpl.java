@@ -1,8 +1,7 @@
-package com.fedag.rcrm.service.impl;
+package com.fedag.rcrm.security;
 
 import com.fedag.rcrm.model.HRModel;
 import com.fedag.rcrm.repos.HRRepo;
-import com.fedag.rcrm.security.HrDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,9 +17,10 @@ public class HrDetailsServiceImpl implements UserDetailsService {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        HRModel model = repo.findByLogin(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Hr with login: " + username + " not found"));
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        HRModel model = repo
+                .findByLogin(login)
+                .orElseThrow(() -> new UsernameNotFoundException("Hr with login: " + login + " not found"));
         return HrDetailsImpl.build(model);
     }
 }
