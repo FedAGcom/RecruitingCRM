@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-//@Component
+@Component
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override
@@ -20,7 +20,7 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
 /**
  * Переопределим AuthenticationEntryPoint.
- *
+ * <p>
  * В стандартном веб-приложении, когда осуществляется обращение к защищенному ресурсу
  * и в секьюрити контексте отсутствует объект Authentication,
  * Spring Security перенаправляет пользователя на страницу аутентификации.

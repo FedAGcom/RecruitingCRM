@@ -1,8 +1,6 @@
 package com.fedag.rcrm.repos;
 
-import com.fedag.rcrm.enums.Role;
 import com.fedag.rcrm.model.FeedbackModel;
-import com.fedag.rcrm.model.HRModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,6 +16,7 @@ public interface FeedbackRepo extends JpaRepository<FeedbackModel, Long> {
     void deleteById(Long id);
 
     Page<FeedbackModel> findAll(Pageable pageable);
+
     Page<FeedbackModel> findAllByDeletedFalse(Pageable pageable);
 
 }

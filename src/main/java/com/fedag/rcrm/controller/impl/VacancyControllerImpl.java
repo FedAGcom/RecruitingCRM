@@ -25,7 +25,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RequiredArgsConstructor
 @RequestMapping("/v1/vacancies")
 @Api(value = "Vacancies", tags = "Vacancies API")
-public class VacancyControllerImpl{
+public class VacancyControllerImpl {
 
     private final VacancyService vacancyService;
 
@@ -38,7 +38,7 @@ public class VacancyControllerImpl{
             @ApiResponse(code = 403, message = "Доступ запрещён"),
             @ApiResponse(code = 404, message = "Страница не найдена")
     })
-    public VacancyResponseDto findById(@PathVariable Long id){
+    public VacancyResponseDto findById(@PathVariable Long id) {
         return vacancyService.findById(id);
     }
 
@@ -50,8 +50,8 @@ public class VacancyControllerImpl{
             @ApiResponse(code = 403, message = "Доступ запрещён"),
             @ApiResponse(code = 404, message = "Страница не найдена")
     })
-    public ResponseEntity<Page<VacancyResponseDto>> findAll(@PageableDefault(size = 5) Pageable pageable){
-        return  new ResponseEntity<>(vacancyService.findAll(pageable), OK);
+    public ResponseEntity<Page<VacancyResponseDto>> findAll(@PageableDefault(size = 5) Pageable pageable) {
+        return new ResponseEntity<>(vacancyService.findAll(pageable), OK);
     }
 
 
@@ -63,8 +63,8 @@ public class VacancyControllerImpl{
             @ApiResponse(code = 403, message = "Доступ запрещён"),
             @ApiResponse(code = 404, message = "Страница не найдена")
     })
-    public ResponseEntity<Page<VacancyResponseDto>> findAllByStatus(@PageableDefault(size = 5) Pageable pageable, @PathVariable String status){
-        return  new ResponseEntity<>(vacancyService.findAllByStatus(status.toUpperCase(), pageable), OK);
+    public ResponseEntity<Page<VacancyResponseDto>> findAllByStatus(@PageableDefault(size = 5) Pageable pageable, @PathVariable String status) {
+        return new ResponseEntity<>(vacancyService.findAllByStatus(status.toUpperCase(), pageable), OK);
     }
 
     @DeleteMapping("/{id}")
@@ -75,7 +75,7 @@ public class VacancyControllerImpl{
             @ApiResponse(code = 401, message = "Пользователь не авторизован"),
             @ApiResponse(code = 403, message = "Доступ запрещён")
     })
-    public ResponseEntity<?> deleteById(@PathVariable Long id){
+    public ResponseEntity<?> deleteById(@PathVariable Long id) {
         vacancyService.deleteById(id);
         return new ResponseEntity<>("vacancy deleted", HttpStatus.OK);
     }
@@ -90,10 +90,9 @@ public class VacancyControllerImpl{
             @ApiResponse(code = 404, message = "Страница не найдена")
     })
     public ResponseEntity<VacancyResponseDto> update(@PathVariable Long id,
-                                                @RequestBody @Valid VacancyRequestUpdateDto vacancyRequestUpdateDto) {
+                                                     @RequestBody @Valid VacancyRequestUpdateDto vacancyRequestUpdateDto) {
         return new ResponseEntity<>(vacancyService.update(id, vacancyRequestUpdateDto), HttpStatus.OK);
     }
-
 
 
     @PostMapping
@@ -105,7 +104,7 @@ public class VacancyControllerImpl{
             @ApiResponse(code = 403, message = "Доступ запрещён"),
             @ApiResponse(code = 404, message = "Страница не найдена")
     })
-    public ResponseEntity<VacancyResponseDto> createVacancy(@RequestBody VacancyRequestDto vacancyRequestDto){
+    public ResponseEntity<VacancyResponseDto> createVacancy(@RequestBody VacancyRequestDto vacancyRequestDto) {
 
         return new ResponseEntity<>(vacancyService.create(vacancyRequestDto), HttpStatus.CREATED);
     }

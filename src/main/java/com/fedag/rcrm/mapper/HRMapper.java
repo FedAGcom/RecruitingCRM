@@ -7,7 +7,10 @@ import com.fedag.rcrm.model.dto.response.HRResponseDto;
 
 public interface HRMapper {
     HRResponseDto toResponse(HRModel hrModel);
+
     HRModel fromRequest(HRRequestDto hrRequestDto);
+
     HRModel fromRequestUpdate(HRRequestUpdateDto hrRequestUpdateDto);
+
     HRModel toUpdateModel(HRModel source, HRModel target);
 }

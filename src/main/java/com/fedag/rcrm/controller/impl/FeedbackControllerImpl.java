@@ -36,7 +36,7 @@ public class FeedbackControllerImpl {
     @ApiResponse(responseCode = "500", description = "Ошибка сервера",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @GetMapping("/{id}")
-    public FeedbackResponseDto findById(@PathVariable Long id){
+    public FeedbackResponseDto findById(@PathVariable Long id) {
         return feedbackService.findById(id);
     }
 
@@ -46,7 +46,7 @@ public class FeedbackControllerImpl {
     @ApiResponse(responseCode = "500", description = "Ошибка сервера",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @GetMapping
-    public ResponseEntity<Page<FeedbackResponseDto>> findAll(@PageableDefault(size = 5) Pageable pageable){
+    public ResponseEntity<Page<FeedbackResponseDto>> findAll(@PageableDefault(size = 5) Pageable pageable) {
         return new ResponseEntity<>(feedbackService.findAll(pageable), HttpStatus.OK);
     }
 
@@ -60,7 +60,7 @@ public class FeedbackControllerImpl {
     @ApiResponse(responseCode = "500", description = "Ошибка сервера",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteById(@PathVariable Long id){
+    public ResponseEntity<?> deleteById(@PathVariable Long id) {
         feedbackService.deleteById(id);
         return new ResponseEntity<>("Feedback deleted", HttpStatus.OK);
     }
@@ -76,7 +76,7 @@ public class FeedbackControllerImpl {
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @PatchMapping("/{id}")
     public ResponseEntity<FeedbackResponseDto> update(@PathVariable Long id,
-                                                @RequestBody @Valid FeedbackRequestUpdateDto feedbackRequestUpdateDto) {
+                                                      @RequestBody @Valid FeedbackRequestUpdateDto feedbackRequestUpdateDto) {
         FeedbackResponseDto feedback = feedbackService.update(id, feedbackRequestUpdateDto);
 
         return new ResponseEntity<>(feedback, HttpStatus.OK);

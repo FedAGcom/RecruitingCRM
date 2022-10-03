@@ -79,7 +79,7 @@ public class CandidateMapperImpl implements CandidateMapper {
         model.setCvLink(dto.getCvLink());
         model.setCreationDate(LocalDateTime.now());
         model.setStatus("NEW");
-        HRModel hr = hrRepo.findById(1L).orElseThrow(()-> new RuntimeException("Error"));
+        HRModel hr = hrRepo.findById(1L).orElseThrow(() -> new RuntimeException("Error"));
         model.setHr(hr);
         VacancyModel vacancyModel = vacancyRepo.findById(vacancyId).orElseThrow(() -> new RuntimeException("Vacancy ID not found in candidate mapper"));
         model.setVacancy(vacancyModel);

@@ -8,7 +8,10 @@ import com.fedag.rcrm.model.dto.response.FeedbackResponseDto;
 
 public interface FeedbackMapper {
     FeedbackResponseDto toResponse(FeedbackModel feedbackModel);
+
     FeedbackModel fromRequest(FeedbackRequestDto feedbackRequestDto);
+
     FeedbackModel fromRequestUpdate(FeedbackRequestUpdateDto feedbackRequestUpdateDto);
+
     FeedbackModel toUpdateModel(FeedbackModel source, FeedbackModel target);
 }

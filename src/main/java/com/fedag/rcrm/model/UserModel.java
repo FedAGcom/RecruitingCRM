@@ -7,11 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,13 +19,13 @@ public abstract class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ApiModelProperty(notes = "Provided user ID", required =true)
+    @ApiModelProperty(notes = "Provided user ID", required = true)
     @Schema(description = "User ID",
             example = "1")
     private Long id;
 
     @Column(name = "first_name")
-    @ApiModelProperty(notes = "Provided user firstname", required =true)
+    @ApiModelProperty(notes = "Provided user firstname", required = true)
     @Schema(description = "User name",
             maxLength = 255,
             minLength = 1,
@@ -37,7 +33,7 @@ public abstract class UserModel {
     private String firstName;
 
     @Column(name = "lastname")
-    @ApiModelProperty(notes = "Provided user lastname", required =true)
+    @ApiModelProperty(notes = "Provided user lastname", required = true)
     @Schema(description = "User lastname",
             maxLength = 255,
             minLength = 1,

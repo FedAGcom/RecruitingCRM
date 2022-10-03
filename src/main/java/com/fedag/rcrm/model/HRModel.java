@@ -1,7 +1,6 @@
 package com.fedag.rcrm.model;
 
 import com.fedag.rcrm.enums.Role;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,11 +8,8 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 @NoArgsConstructor
@@ -22,9 +18,9 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "hr",
-    uniqueConstraints = {
-            @UniqueConstraint(columnNames = "login")
-})
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "login")
+        })
 public class HRModel extends EmployeeModel {
 
     @Column(name = "login")
@@ -65,16 +61,16 @@ public class HRModel extends EmployeeModel {
     @Column(name = "active")
     private boolean active = true;
 
-    public void addCandidate(CandidateModel candidateModel){
+    public void addCandidate(CandidateModel candidateModel) {
         this.candidates.add(candidateModel);
         candidateModel.setHr(this);
     }
 
-    public void  removeCandidate(CandidateModel candidateModel){
+    public void removeCandidate(CandidateModel candidateModel) {
         this.candidates.remove(candidateModel);
     }
 
-    public void addFeedback(FeedbackModel feedbackModel){
+    public void addFeedback(FeedbackModel feedbackModel) {
         this.feedbacks.add(feedbackModel);
         feedbackModel.setHr(this);
     }
@@ -83,12 +79,12 @@ public class HRModel extends EmployeeModel {
         this.feedbacks.remove(feedbackModel);
     }*/
 
-    public void addVacancy(VacancyModel vacancyModel){
+    public void addVacancy(VacancyModel vacancyModel) {
         this.vacancies.add(vacancyModel);
         vacancyModel.getHrs().add(this);
     }
 
-    public void deleteVacancy(VacancyModel vacancyModel){
+    public void deleteVacancy(VacancyModel vacancyModel) {
         this.vacancies.remove(vacancyModel);
         vacancyModel.getHrs().remove(this);
     }

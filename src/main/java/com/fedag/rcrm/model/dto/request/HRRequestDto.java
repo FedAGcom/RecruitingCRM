@@ -1,6 +1,5 @@
 package com.fedag.rcrm.model.dto.request;
 
-import com.fedag.rcrm.enums.Role;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,8 +10,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
-import java.util.Set;
 
 // SignupRequest
 @Getter

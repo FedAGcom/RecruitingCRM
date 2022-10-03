@@ -3,9 +3,7 @@ package com.fedag.rcrm.controller.impl;
 import com.fedag.rcrm.model.CandidateModel;
 import com.fedag.rcrm.model.dto.request.CandidateRequestDto;
 import com.fedag.rcrm.model.dto.request.CandidateRequestUpdateDto;
-import com.fedag.rcrm.model.dto.request.HRRequestUpdateDto;
 import com.fedag.rcrm.model.dto.response.CandidateResponseDto;
-import com.fedag.rcrm.model.dto.response.HRResponseDto;
 import com.fedag.rcrm.service.impl.CandidateServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
@@ -29,7 +26,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RequiredArgsConstructor
 @RequestMapping("/v1/candidates")
 @Api(value = "Candidate", tags = "Candidate API")
-public class CandidateControllerImpl{
+public class CandidateControllerImpl {
 
     private final CandidateServiceImpl candidateService;
 
@@ -37,7 +34,7 @@ public class CandidateControllerImpl{
     @ApiOperation(value = "Получение данных тз БД об одном кандидате по ID", response = CandidateModel.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Данные получены"),
-            @ApiResponse(code = 404, message = "Кандидат не найден") } )
+            @ApiResponse(code = 404, message = "Кандидат не найден")})
     public ResponseEntity<CandidateResponseDto> getCandidate(@PathVariable(name = "id") Long id) {
         final CandidateResponseDto candidate = candidateService.getCandidate(id);
         return candidate != null
@@ -48,7 +45,7 @@ public class CandidateControllerImpl{
     @GetMapping
     @ApiOperation("Получение списка всех кандидатов в БД")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Данные получены")} )
+            @ApiResponse(code = 200, message = "Данные получены")})
     public ResponseEntity<Page<CandidateResponseDto>> getAllCandidate(@PageableDefault(size = 5) Pageable pageable) {
         return new ResponseEntity<>(candidateService.getAllCandidate(pageable), HttpStatus.OK);
 
@@ -93,8 +90,7 @@ public class CandidateControllerImpl{
     @ApiOperation("Изменение статуса кандидата")
     public ResponseEntity<CandidateResponseDto> changeStatus(
             @PathVariable(name = "id") Long id,
-            @PathVariable(name = "status") String status)
-    {
+            @PathVariable(name = "status") String status) {
         return new ResponseEntity<>(candidateService.setCandidateStatus(id, status), HttpStatus.OK);
     }
 }

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -37,15 +36,8 @@ public class HrDetailsImpl implements UserDetails {
 
     public static HrDetailsImpl build(HRModel model) {
         HrDetailsImpl details = new HrDetailsImpl();
-//        List<GrantedAuthority> authorities = model.getRoles()
-//                .stream()
-//                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
-//                .collect(Collectors.toList());
-
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(model.getRole().getName()));
-
-
         details.setId(model.getId());
         details.setLogin(model.getLogin());
         details.setPassword(String.valueOf(model.getPassword()));

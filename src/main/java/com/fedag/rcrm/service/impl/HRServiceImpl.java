@@ -27,7 +27,7 @@ public class HRServiceImpl implements HRService {
     @Override
     public HRResponseDto findById(Long id) {
         log.info("Поиск HR с Id: {}", id);
-        HRModel hrModel = hrRepo.findById(id).orElseThrow(()->new EntityNotFoundException("HR", "ID", id));
+        HRModel hrModel = hrRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("HR", "ID", id));
         HRResponseDto result = hrMapper.toResponse(hrModel);
         log.info("HR с Id: {} найден", id);
         return result;
@@ -36,7 +36,7 @@ public class HRServiceImpl implements HRService {
     @Override
     public HRResponseDto findByLogin(String login) {
         log.info("Поиск HR по логину: {}", login);
-        HRModel hrModel = hrRepo.findByLogin(login).orElseThrow(()-> new EntityNotFoundException("HR", "login", login));
+        HRModel hrModel = hrRepo.findByLogin(login).orElseThrow(() -> new EntityNotFoundException("HR", "login", login));
         HRResponseDto result = hrMapper.toResponse(hrModel);
         log.info("HR с логином: {} найден", login);
         return result;
@@ -64,8 +64,8 @@ public class HRServiceImpl implements HRService {
     public HRResponseDto update(Long id, HRRequestUpdateDto hrRequestUpdateDto) {
         log.info("Обновление HR с Id: {}", id);
         HRModel hr = hrMapper.fromRequestUpdate(hrRequestUpdateDto);
-        HRModel target = hrRepo.findById(id).orElseThrow(()->new EntityNotFoundException("HR", "ID", id));
-        if (!hr.getLogin().equals(target.getLogin())){
+        HRModel target = hrRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("HR", "ID", id));
+        if (!hr.getLogin().equals(target.getLogin())) {
             if (hrRepo.findByLogin(hr.getLogin()).isPresent()) {
                 throw new EntityAlreadyExistsException("HR", "login", hr.getLogin());
             }

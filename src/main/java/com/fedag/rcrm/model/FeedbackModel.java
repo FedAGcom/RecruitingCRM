@@ -8,7 +8,6 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -22,7 +21,7 @@ public class FeedbackModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "id")
+    @Column(name = "id")
     private Long id;
 
     @ManyToOne
@@ -47,6 +46,6 @@ public class FeedbackModel {
     @Column(name = "updated")
     private LocalDateTime updated;
 
-    @Column(name="deleted")
+    @Column(name = "deleted")
     private boolean deleted;
 }

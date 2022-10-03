@@ -2,7 +2,8 @@ package com.fedag.rcrm.security.jwt;
 
 import com.fedag.rcrm.exception.JwtAuthenticationException;
 import com.fedag.rcrm.security.HrDetailsImpl;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Key;
-import java.security.Principal;
 import java.util.Base64;
 import java.util.Date;
 

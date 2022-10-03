@@ -8,7 +8,6 @@ import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +15,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -38,7 +38,8 @@ public class HrControllerImpl {
     @ApiResponse(responseCode = "500", description = "Ошибка сервера",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @GetMapping("/{id}")
-    public ResponseEntity<HRResponseDto> findById(@PathVariable Long id){
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<HRResponseDto> findById(@PathVariable Long id) {
         return new ResponseEntity<>(hrService.findById(id), HttpStatus.OK);
     }
 
@@ -48,7 +49,8 @@ public class HrControllerImpl {
     @ApiResponse(responseCode = "500", description = "Ошибка сервера",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @GetMapping
-    public ResponseEntity<Page<HRResponseDto>>  findAll(@PageableDefault(size = 5) Pageable pageable){
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<Page<HRResponseDto>> findAll(@PageableDefault(size = 5) Pageable pageable) {
         return new ResponseEntity<>(hrService.findAll(pageable), HttpStatus.OK);
     }
 
@@ -58,9 +60,10 @@ public class HrControllerImpl {
     @ApiResponse(responseCode = "500", description = "Ошибка сервера",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @GetMapping("role/{role}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Page<HRResponseDto>> findAllByRole(@PathVariable String role,
-                                                                     @PageableDefault(size = 5)
-                                                                             Pageable pageable) {
+                                                             @PageableDefault(size = 5)
+                                                             Pageable pageable) {
         Page<HRResponseDto> users = hrService.findAllByRole(role, pageable);
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
@@ -75,7 +78,8 @@ public class HrControllerImpl {
     @ApiResponse(responseCode = "500", description = "Ошибка сервера",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteById(@PathVariable Long id){
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<?> deleteById(@PathVariable Long id) {
         hrService.deleteById(id);
         return new ResponseEntity<>("User deleted", HttpStatus.OK);
     }
@@ -90,8 +94,9 @@ public class HrControllerImpl {
     @ApiResponse(responseCode = "500", description = "Ошибка сервера",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @PatchMapping("/{id}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<HRResponseDto> update(@PathVariable Long id,
-                                                    @RequestBody @Valid HRRequestUpdateDto hrRequestUpdate) {
+                                                @RequestBody @Valid HRRequestUpdateDto hrRequestUpdate) {
         HRResponseDto hrResponseDto = hrService.update(id, hrRequestUpdate);
 
         return new ResponseEntity<>(hrResponseDto, HttpStatus.OK);

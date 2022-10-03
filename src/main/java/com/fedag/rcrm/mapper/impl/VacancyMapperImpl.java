@@ -57,25 +57,25 @@ public class VacancyMapperImpl implements VacancyMapper {
 
     @Override
     public VacancyModel merge(VacancyModel source, VacancyModel target) {
-        if(source.getTitle() != null){
+        if (source.getTitle() != null) {
             target.setTitle(source.getTitle());
         }
-        if(source.getPosition() != null){
+        if (source.getPosition() != null) {
             target.setPosition(source.getPosition());
         }
-        if(source.getSalary() >= Math.pow(0.0, -10)){
+        if (source.getSalary() >= Math.pow(0.0, -10)) {
             target.setSalary(source.getSalary());
         }
-        if(source.getCreationDate() != null){
+        if (source.getCreationDate() != null) {
             target.setCreationDate(source.getCreationDate());
         }
-        if(source.getComment() != null){
+        if (source.getComment() != null) {
             target.setComment(source.getComment());
         }
-        if(source.getDescription() != null){
+        if (source.getDescription() != null) {
             target.setDescription(source.getDescription());
         }
-        if(source.getStatus() != null){
+        if (source.getStatus() != null) {
             target.setStatus(source.getStatus());
         }
 

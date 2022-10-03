@@ -1,10 +1,10 @@
 package com.fedag.rcrm.model;
 
 import com.fedag.rcrm.enums.Role;
-import lombok.Getter;
-import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
 
 //@Entity
 //@Table(name = "roles")
@@ -19,7 +19,8 @@ public class UserRoleModel {
     @Enumerated(EnumType.STRING)
     private Role name;
 
-    public UserRoleModel() {}
+    public UserRoleModel() {
+    }
 
     public UserRoleModel(Role name) {
         this.name = name;

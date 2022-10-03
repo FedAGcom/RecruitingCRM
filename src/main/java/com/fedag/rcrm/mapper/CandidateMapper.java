@@ -12,7 +12,10 @@ import java.util.List;
 public interface CandidateMapper {
 
     CandidateResponseDto toCandidateResponseDto(CandidateModel model);
+
     List<CandidateResponseDto> toListCandidateResponseDto(List<CandidateModel> list);
+
     CandidateModel toCandidateModel(CandidateRequestDto dto, Long vacancyId);
+
     CandidateModel toCandidateModelUpdate(CandidateModel source, CandidateRequestUpdateDto dto, HRModel hr, VacancyModel vacancy);
 }

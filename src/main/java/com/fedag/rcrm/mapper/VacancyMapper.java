@@ -8,7 +8,9 @@ import com.fedag.rcrm.model.dto.response.VacancyResponseDto;
 public interface VacancyMapper {
 
     VacancyResponseDto toResponse(VacancyModel vacancyModel);
+
     VacancyModel fromRequest(VacancyRequestDto vacancyRequestDto);
+
     VacancyModel fromRequestUpdate(VacancyRequestUpdateDto vacancyRequestUpdateDto);
 
     VacancyModel merge(VacancyModel source, VacancyModel target);

@@ -28,7 +28,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     public FeedbackResponseDto findById(Long id) {
         log.info("Поиск отзыва с Id: {}", id);
         FeedbackModel feedbackModel = feedbackRepo.findById(id)
-                .orElseThrow(()->new EntityNotFoundException("Feedback", "id", id));
+                .orElseThrow(() -> new EntityNotFoundException("Feedback", "id", id));
         FeedbackResponseDto result = feedbackMapper.toResponse(feedbackModel);
         log.info("Отзыв с Id: {} найден", id);
         return result;
@@ -70,7 +70,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     public FeedbackResponseDto update(Long id, FeedbackRequestUpdateDto feedbackRequestUpdateDto) {
         log.info("Обновление отзыва с Id: {}", id);
         FeedbackModel updateModel = feedbackMapper.fromRequestUpdate(feedbackRequestUpdateDto);
-        FeedbackModel modelFromBD= feedbackRepo.findById(id).orElseThrow(()->new EntityNotFoundException("Feedback", "ID", id));
+        FeedbackModel modelFromBD = feedbackRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("Feedback", "ID", id));
         FeedbackModel update = feedbackMapper.toUpdateModel(updateModel, modelFromBD);
         FeedbackResponseDto result = feedbackMapper.toResponse(feedbackRepo.save(update));
         log.info("Отзыв с Id: {} обновлен", id);

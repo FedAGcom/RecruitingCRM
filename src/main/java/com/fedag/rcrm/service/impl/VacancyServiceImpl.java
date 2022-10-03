@@ -16,8 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -31,7 +29,7 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public VacancyResponseDto findById(Long id) {
         log.info("Поиск вакансии с Id: {}", id);
-        VacancyModel vacancyModel = vacancyRepo.findById(id).orElseThrow(()->new EntityNotFoundException("Vacancy", "ID", id));
+        VacancyModel vacancyModel = vacancyRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("Vacancy", "ID", id));
         VacancyResponseDto result = vacancyMapper.toResponse(vacancyModel);
         log.info("Вакансия с Id: {} найдена", id);
         return result;
@@ -40,7 +38,7 @@ public class VacancyServiceImpl implements VacancyService {
     @Override//
     public VacancyResponseDto findByTitle(String title) {
         log.info("Поиск вакансии с названием: {}", title);
-        VacancyModel vacancyModel = vacancyRepo.findByTitle(title).orElseThrow(()-> new RuntimeException("Vacancy with title" +
+        VacancyModel vacancyModel = vacancyRepo.findByTitle(title).orElseThrow(() -> new RuntimeException("Vacancy with title" +
                 title + " not found"));
         VacancyResponseDto result = vacancyMapper.toResponse(vacancyModel);
         log.info("Вакансия с названием: {} найдена", title);
@@ -65,11 +63,10 @@ public class VacancyServiceImpl implements VacancyService {
     public Page<VacancyResponseDto> findAllByStatus(String status, Pageable pageable) {
         log.info("Получение страницы с вакансиями со статусом: {}", status);
         Page<VacancyResponseDto> result = vacancyRepo.findAllByStatusContains(status, pageable)
-                                                     .map(vacancyMapper::toResponse);
+                .map(vacancyMapper::toResponse);
         log.info("Страница с вакансиями со статусом: {} получена", status);
         return result;
     }
-
 
 
     @Override
@@ -85,7 +82,7 @@ public class VacancyServiceImpl implements VacancyService {
     @Transactional
     public VacancyResponseDto update(Long id, VacancyRequestUpdateDto vacancyRequestUpdateDto) {
         log.info("Обновление вакансии с Id: {}", id);
-        VacancyModel model = vacancyRepo.findById(id).orElseThrow(()->new EntityNotFoundException("Vacancy", "ID", id));
+        VacancyModel model = vacancyRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("Vacancy", "ID", id));
         VacancyResponseDto result = vacancyMapper.toResponse(vacancyMapper.toVacancyModelUpdate(model, vacancyRequestUpdateDto));
         log.info("Вакансия с Id: {} обновлена", id);
         return result;

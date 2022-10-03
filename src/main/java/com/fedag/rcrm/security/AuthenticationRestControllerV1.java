@@ -1,15 +1,12 @@
 package com.fedag.rcrm.security;
 
-import com.fedag.rcrm.enums.Role;
 import com.fedag.rcrm.mapper.HRMapper;
 import com.fedag.rcrm.message.MessageResponse;
 import com.fedag.rcrm.model.HRModel;
-import com.fedag.rcrm.model.UserRoleModel;
 import com.fedag.rcrm.model.dto.request.HRRequestDto;
 import com.fedag.rcrm.model.dto.security.JwtResponseDto;
 import com.fedag.rcrm.model.dto.security.LoginRequestDto;
 import com.fedag.rcrm.repos.HRRepo;
-import com.fedag.rcrm.repos.RoleRepository;
 import com.fedag.rcrm.security.jwt.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +18,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/v1/auth")
-@CrossOrigin(origins = "*", maxAge = 3600) // так можно оставить?
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class AuthenticationRestControllerV1 {
 
     @Autowired
@@ -36,9 +31,6 @@ public class AuthenticationRestControllerV1 {
 
     @Autowired
     HRRepo hrRepo;
-
-//    @Autowired
-//    RoleRepository roleRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -64,7 +56,6 @@ public class AuthenticationRestControllerV1 {
         String token = provider.generateJwtToken(authentication);
         HrDetailsImpl details = (HrDetailsImpl) authentication.getPrincipal();
 
-
         List<String> roles = details.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
@@ -74,14 +65,12 @@ public class AuthenticationRestControllerV1 {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody HRRequestDto request) {
-
         // проверка на существующий логин
-//        if (hrRepo.existByLogin(request.getLogin())) {
-//            return ResponseEntity
-//                    .badRequest()
-//                    .body(new MessageResponse("ERROR: login already exist"));
-//        }
-
+        if (hrRepo.existsByLogin(request.getLogin())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("ERROR: login already exist"));
+        }
         HRModel hrModel = hrMapper.fromRequest(request);
         String password = passwordEncoder.encode(String.valueOf(request.getPassword()));
         hrModel.setPassword(password.toCharArray());

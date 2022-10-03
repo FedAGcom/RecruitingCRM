@@ -1,7 +1,10 @@
 package com.fedag.rcrm.security.jwt;
 
 import com.fedag.rcrm.security.HrDetailsServiceImpl;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,7 +37,7 @@ public class JwtTokenFilter extends OncePerRequestFilter { // GenericFilterBean
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain)
-                                    throws ServletException, IOException {
+            throws ServletException, IOException {
         try {
             String token = parseJwt(request);
 

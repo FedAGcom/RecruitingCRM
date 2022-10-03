@@ -1,19 +1,7 @@
 package com.fedag.rcrm.security;
 
-import com.fedag.rcrm.enums.Role;
-import com.fedag.rcrm.model.HRModel;
-import com.fedag.rcrm.repos.HRRepo;
-import com.fedag.rcrm.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

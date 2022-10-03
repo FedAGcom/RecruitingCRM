@@ -35,8 +35,8 @@ public class ExpOfWorkControllerImpl {
     @ApiResponse(responseCode = "500", description = "Server error",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @GetMapping("/candidate={id}")
-    public ResponseEntity<Page<ExpOfWorkResponseDto>> getAllExpOfWorkByCandidateId(@PathVariable (name = "id") Long candidateId,
-                                                          @PageableDefault(size = 5) Pageable pageable) {
+    public ResponseEntity<Page<ExpOfWorkResponseDto>> getAllExpOfWorkByCandidateId(@PathVariable(name = "id") Long candidateId,
+                                                                                   @PageableDefault(size = 5) Pageable pageable) {
         return new ResponseEntity<>(service.getAllCandidateExperience(pageable, candidateId), HttpStatus.OK);
     }
 
@@ -64,7 +64,7 @@ public class ExpOfWorkControllerImpl {
     @ApiResponse(responseCode = "500", description = "Server error",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @PostMapping
-    public ResponseEntity<ExpOfWorkResponseDto> addExpOfWork(@PathVariable (name = "id") Long candidateId, @RequestBody ExpOfWorkRequestDto dto) {
+    public ResponseEntity<ExpOfWorkResponseDto> addExpOfWork(@PathVariable(name = "id") Long candidateId, @RequestBody ExpOfWorkRequestDto dto) {
         return new ResponseEntity<>(service.addExpOfWork(dto, candidateId), HttpStatus.OK);
     }
 

@@ -1,8 +1,10 @@
 package com.fedag.rcrm.model.dto.response;
 
-import com.fedag.rcrm.model.*;
+import com.fedag.rcrm.model.UserModel;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

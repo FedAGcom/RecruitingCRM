@@ -60,7 +60,7 @@ public class ExpOfWorkServiceImpl implements ExpOfWorkService {
         log.info("Обновление опыта работы с Id: {}", id);
         ExpOfWorkModel model = expRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("Exp of work", "ID", id));
         CandidateModel candidateModel = candidateRepo.findById(requestUpdate.getCandidateId())
-                                                     .orElseThrow(() -> new EntityNotFoundException("Candidate", "ID", requestUpdate.getCandidateId()));
+                .orElseThrow(() -> new EntityNotFoundException("Candidate", "ID", requestUpdate.getCandidateId()));
         ExpOfWorkResponseDto result = expMapper.toExpResponseDto(expMapper.toExpModelUpdate(model, requestUpdate, candidateModel));
         log.info("Опыт работы с Id: {} обновлен", id);
         return result;

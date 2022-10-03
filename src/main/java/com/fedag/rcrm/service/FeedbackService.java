@@ -8,8 +8,12 @@ import org.springframework.data.domain.Pageable;
 
 public interface FeedbackService {
     FeedbackResponseDto findById(Long id);
+
     Page<FeedbackResponseDto> findAll(Pageable pageable);
+
     FeedbackResponseDto create(Long candidateId, FeedbackRequestDto feedbackRequestDto);
+
     void deleteById(Long id);
+
     FeedbackResponseDto update(Long id, FeedbackRequestUpdateDto hrRequestUpdateDto);
 }
