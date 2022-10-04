@@ -1,5 +1,8 @@
 package com.fedag.rcrm.controller.impl;
 
+import com.fedag.rcrm.exception.EntityNotFoundException;
+import com.fedag.rcrm.exception.NoSuchUserException;
+import com.fedag.rcrm.exception.UserIncorrectData;
 import com.fedag.rcrm.model.dto.request.HRRequestDto;
 import com.fedag.rcrm.model.dto.request.HRRequestUpdateDto;
 import com.fedag.rcrm.model.dto.response.HRResponseDto;
@@ -40,7 +43,11 @@ public class HrControllerImpl {
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<HRResponseDto> findById(@PathVariable Long id) {
-        return new ResponseEntity<>(hrService.findById(id), HttpStatus.OK);
+        HRResponseDto user = hrService.findById(id);
+        if (user == null) {
+            throw new NoSuchUserException("There is no user with ID = " + id + "in Database");
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @Operation(summary = "Получение страницы с HRs")

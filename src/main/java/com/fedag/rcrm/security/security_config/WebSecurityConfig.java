@@ -1,6 +1,7 @@
 package com.fedag.rcrm.security.security_config;
 
 import com.fedag.rcrm.security.HrDetailsServiceImpl;
+import com.fedag.rcrm.security.RestAuthenticationEntryPoint;
 import com.fedag.rcrm.security.jwt.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -28,8 +29,8 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     @Autowired
     HrDetailsServiceImpl service;
 
-//    @Autowired
-//    private RestAuthenticationEntryPoint entryPoint;
+    @Autowired
+    private RestAuthenticationEntryPoint entryPoint;
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -55,14 +56,14 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .cors().and().csrf().disable()
-//                .exceptionHandling().authenticationEntryPoint(entryPoint)
-//                .and()
+                .exceptionHandling().authenticationEntryPoint(entryPoint)
+                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
-                .antMatchers("/swagger-ui/**").permitAll()
-//                .antMatchers("/v1/hrs").permitAll()
-//                .antMatchers("/v1/test/**").permitAll()
+                .antMatchers("/swagger-ui/index.html").permitAll()
+                .antMatchers("/v1/hrs/**").permitAll()
+                .antMatchers("/v1/test/**").permitAll()
                 .antMatchers("/v1/auth/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
