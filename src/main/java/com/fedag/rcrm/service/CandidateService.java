@@ -22,5 +22,6 @@ public interface CandidateService {
 
     Page<CandidateResponseDto> getAllCandidateWithStatus(Pageable pageable, String status);
 
+    void updateTotalRating(Long candidateId);
 
 }

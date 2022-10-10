@@ -97,4 +97,22 @@ public class CandidateModel extends UserModel {
         vacancyModel.addCandidate(this);
     }
 
+    public void updateTotalRating(){
+        double totalRating = 0;
+        int feedbacksSize = 0;
+        if (!feedbacks.isEmpty()){
+            for (FeedbackModel feedback: feedbacks
+            ) {
+                if (!feedback.isDeleted()){
+                    totalRating+=feedback.getRating();
+                    feedbacksSize++;
+                }
+            }
+            if (feedbacksSize > 0){
+                totalRating/= feedbacksSize;
+            }
+        }
+        this.totalRating = totalRating;
+    }
+
 }

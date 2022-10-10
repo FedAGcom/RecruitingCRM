@@ -95,4 +95,13 @@ public class CandidateServiceImpl implements CandidateService {
         log.info("Кандидат с Id: {} обновлен", candidateId);
         return result;
     }
+
+    @Transactional
+    @Override
+    public void updateTotalRating(Long candidateId) {
+        log.info("Обновление рейтинга кандидата с Id: {}", candidateId);
+        CandidateModel candidate = candidateRepo.findById(candidateId).orElseThrow(() -> new EntityNotFoundException("Candidate", "ID", candidateId));
+        candidate.updateTotalRating();
+        log.info("Рейтинг кандидата с Id: {} обновлен", candidateId);
+    }
 }
