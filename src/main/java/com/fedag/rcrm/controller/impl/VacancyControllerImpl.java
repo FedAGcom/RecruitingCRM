@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -38,6 +39,7 @@ public class VacancyControllerImpl {
             @ApiResponse(code = 403, message = "Доступ запрещён"),
             @ApiResponse(code = 404, message = "Страница не найдена")
     })
+    @PreAuthorize("hasAuthority('USER')")
     public VacancyResponseDto findById(@PathVariable Long id) {
         return vacancyService.findById(id);
     }
@@ -50,6 +52,7 @@ public class VacancyControllerImpl {
             @ApiResponse(code = 403, message = "Доступ запрещён"),
             @ApiResponse(code = 404, message = "Страница не найдена")
     })
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<Page<VacancyResponseDto>> findAll(@PageableDefault(size = 5) Pageable pageable) {
         return new ResponseEntity<>(vacancyService.findAll(pageable), OK);
     }
@@ -63,6 +66,7 @@ public class VacancyControllerImpl {
             @ApiResponse(code = 403, message = "Доступ запрещён"),
             @ApiResponse(code = 404, message = "Страница не найдена")
     })
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<Page<VacancyResponseDto>> findAllByStatus(@PageableDefault(size = 5) Pageable pageable, @PathVariable String status) {
         return new ResponseEntity<>(vacancyService.findAllByStatus(status.toUpperCase(), pageable), OK);
     }
@@ -75,6 +79,7 @@ public class VacancyControllerImpl {
             @ApiResponse(code = 401, message = "Пользователь не авторизован"),
             @ApiResponse(code = 403, message = "Доступ запрещён")
     })
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<?> deleteById(@PathVariable Long id) {
         vacancyService.deleteById(id);
         return new ResponseEntity<>("vacancy deleted", HttpStatus.OK);
@@ -89,6 +94,7 @@ public class VacancyControllerImpl {
             @ApiResponse(code = 403, message = "Доступ запрещён"),
             @ApiResponse(code = 404, message = "Страница не найдена")
     })
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<VacancyResponseDto> update(@PathVariable Long id,
                                                      @RequestBody @Valid VacancyRequestUpdateDto vacancyRequestUpdateDto) {
         return new ResponseEntity<>(vacancyService.update(id, vacancyRequestUpdateDto), HttpStatus.OK);
@@ -104,12 +110,9 @@ public class VacancyControllerImpl {
             @ApiResponse(code = 403, message = "Доступ запрещён"),
             @ApiResponse(code = 404, message = "Страница не найдена")
     })
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<VacancyResponseDto> createVacancy(@RequestBody VacancyRequestDto vacancyRequestDto) {
 
         return new ResponseEntity<>(vacancyService.create(vacancyRequestDto), HttpStatus.CREATED);
     }
-
-
-//
-
 }

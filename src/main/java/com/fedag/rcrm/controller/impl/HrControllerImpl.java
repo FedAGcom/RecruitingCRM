@@ -41,7 +41,7 @@ public class HrControllerImpl {
     @ApiResponse(responseCode = "500", description = "Ошибка сервера",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<HRResponseDto> findById(@PathVariable Long id) {
         HRResponseDto user = hrService.findById(id);
         if (user == null) {
@@ -56,7 +56,7 @@ public class HrControllerImpl {
     @ApiResponse(responseCode = "500", description = "Ошибка сервера",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @GetMapping
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<Page<HRResponseDto>> findAll(@PageableDefault(size = 5) Pageable pageable) {
         return new ResponseEntity<>(hrService.findAll(pageable), HttpStatus.OK);
     }
@@ -67,7 +67,7 @@ public class HrControllerImpl {
     @ApiResponse(responseCode = "500", description = "Ошибка сервера",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @GetMapping("role/{role}")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<Page<HRResponseDto>> findAllByRole(@PathVariable String role,
                                                              @PageableDefault(size = 5)
                                                              Pageable pageable) {
@@ -85,7 +85,7 @@ public class HrControllerImpl {
     @ApiResponse(responseCode = "500", description = "Ошибка сервера",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<?> deleteById(@PathVariable Long id) {
         hrService.deleteById(id);
         return new ResponseEntity<>("User deleted", HttpStatus.OK);
@@ -101,7 +101,7 @@ public class HrControllerImpl {
     @ApiResponse(responseCode = "500", description = "Ошибка сервера",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @PatchMapping("/{id}")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<HRResponseDto> update(@PathVariable Long id,
                                                 @RequestBody @Valid HRRequestUpdateDto hrRequestUpdate) {
         HRResponseDto hrResponseDto = hrService.update(id, hrRequestUpdate);

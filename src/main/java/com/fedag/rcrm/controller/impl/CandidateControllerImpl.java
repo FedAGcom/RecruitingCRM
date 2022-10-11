@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -35,6 +36,7 @@ public class CandidateControllerImpl {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Данные получены"),
             @ApiResponse(code = 404, message = "Кандидат не найден")})
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<CandidateResponseDto> getCandidate(@PathVariable(name = "id") Long id) {
         final CandidateResponseDto candidate = candidateService.getCandidate(id);
         return candidate != null
@@ -46,6 +48,7 @@ public class CandidateControllerImpl {
     @ApiOperation("Получение списка всех кандидатов в БД")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Данные получены")})
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<Page<CandidateResponseDto>> getAllCandidate(@PageableDefault(size = 5) Pageable pageable) {
         return new ResponseEntity<>(candidateService.getAllCandidate(pageable), HttpStatus.OK);
 
@@ -58,6 +61,7 @@ public class CandidateControllerImpl {
 
     @GetMapping(value = "/status/{status}")
     @ApiOperation("Получение списка всех кандидатов с фильтром по текущему статусу")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<Page<CandidateResponseDto>> getAllCandidateWithStatus(
             @PageableDefault(size = 5) Pageable pageable,
             @PathVariable(name = "status") String status) {
@@ -67,12 +71,14 @@ public class CandidateControllerImpl {
 
     @PostMapping
     @ApiOperation("Создание записи в БД о новом кандидате")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<CandidateResponseDto> createCandidate(@RequestBody CandidateRequestDto requestDto, Long vacancyId) {
         return new ResponseEntity<>(candidateService.createCandidate(requestDto, vacancyId), CREATED);
     }
 
     @DeleteMapping(value = "/{id}")
     @ApiOperation("Маркировка данных о кандидате как подлежащих удалению")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<?> deleteCandidate(@PathVariable(name = "id") Long id) {
         candidateService.deleteCandidate(id);
         return new ResponseEntity<>("Candidate marked as deleted", HttpStatus.OK);
@@ -80,6 +86,7 @@ public class CandidateControllerImpl {
 
     @PatchMapping(value = "/{id}")
     @ApiOperation("Обновление данных о кандидате")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<?> updateCandidate(@PathVariable(name = "id") Long id,
                                              @RequestBody @Valid CandidateRequestUpdateDto dto) {
         CandidateResponseDto response = candidateService.updateCandidate(dto, id);
@@ -88,6 +95,7 @@ public class CandidateControllerImpl {
 
     @PutMapping(value = "/change/status/{id},{status}")
     @ApiOperation("Изменение статуса кандидата")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<CandidateResponseDto> changeStatus(
             @PathVariable(name = "id") Long id,
             @PathVariable(name = "status") String status) {

@@ -15,6 +15,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -35,6 +36,7 @@ public class ExpOfWorkControllerImpl {
     @ApiResponse(responseCode = "500", description = "Server error",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @GetMapping("/candidate={id}")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<Page<ExpOfWorkResponseDto>> getAllExpOfWorkByCandidateId(@PathVariable(name = "id") Long candidateId,
                                                                                    @PageableDefault(size = 5) Pageable pageable) {
         return new ResponseEntity<>(service.getAllCandidateExperience(pageable, candidateId), HttpStatus.OK);
@@ -50,6 +52,7 @@ public class ExpOfWorkControllerImpl {
     @ApiResponse(responseCode = "500", description = "Server error",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<ExpOfWorkResponseDto> getCandidateExpOfWorkByExpId(@PathVariable(name = "id") Long id) {
         return new ResponseEntity<>(service.getCandidateExperienceByExpId(id), HttpStatus.OK);
     }
@@ -64,6 +67,7 @@ public class ExpOfWorkControllerImpl {
     @ApiResponse(responseCode = "500", description = "Server error",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @PostMapping
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<ExpOfWorkResponseDto> addExpOfWork(@PathVariable(name = "id") Long candidateId, @RequestBody ExpOfWorkRequestDto dto) {
         return new ResponseEntity<>(service.addExpOfWork(dto, candidateId), HttpStatus.OK);
     }
@@ -78,6 +82,7 @@ public class ExpOfWorkControllerImpl {
     @ApiResponse(responseCode = "500", description = "Server error",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @DeleteMapping
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity deleteExpOfWorkById(@PathVariable(name = "id") Long id) {
         service.deleteExpOfWorkById(id);
         return new ResponseEntity(HttpStatus.OK);
@@ -93,6 +98,7 @@ public class ExpOfWorkControllerImpl {
     @ApiResponse(responseCode = "500", description = "Server error",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @PutMapping("/id")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<ExpOfWorkResponseDto> updateCandidateExpOfWork(@PathVariable(name = "id") Long id,
                                                                          @RequestBody ExpOfWorkRequestUpdateDto updateDto) {
         return new ResponseEntity<>(service.updateExpOfWork(updateDto, id), HttpStatus.OK);

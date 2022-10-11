@@ -15,6 +15,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -36,6 +37,7 @@ public class FeedbackControllerImpl {
     @ApiResponse(responseCode = "500", description = "Ошибка сервера",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('USER')")
     public FeedbackResponseDto findById(@PathVariable Long id) {
         return feedbackService.findById(id);
     }
@@ -46,6 +48,7 @@ public class FeedbackControllerImpl {
     @ApiResponse(responseCode = "500", description = "Ошибка сервера",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @GetMapping
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<Page<FeedbackResponseDto>> findAll(@PageableDefault(size = 5) Pageable pageable) {
         return new ResponseEntity<>(feedbackService.findAll(pageable), HttpStatus.OK);
     }
@@ -60,6 +63,7 @@ public class FeedbackControllerImpl {
     @ApiResponse(responseCode = "500", description = "Ошибка сервера",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<?> deleteById(@PathVariable Long id) {
         feedbackService.deleteById(id);
         return new ResponseEntity<>("Feedback deleted", HttpStatus.OK);
@@ -75,6 +79,7 @@ public class FeedbackControllerImpl {
     @ApiResponse(responseCode = "500", description = "Ошибка сервера",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @PatchMapping("/{id}")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<FeedbackResponseDto> update(@PathVariable Long id,
                                                       @RequestBody @Valid FeedbackRequestUpdateDto feedbackRequestUpdateDto) {
         FeedbackResponseDto feedback = feedbackService.update(id, feedbackRequestUpdateDto);
@@ -90,6 +95,7 @@ public class FeedbackControllerImpl {
     @ApiResponse(responseCode = "500", description = "Ошибка сервера",
             content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE)})
     @PostMapping
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<FeedbackResponseDto> create(@RequestParam Long candidateId,
                                                       @RequestBody @Valid FeedbackRequestDto feedbackRequestDto) {
         //FeedbackResponseDto feedback = feedbackService.create(feedbackRequestDto);
