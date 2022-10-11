@@ -52,15 +52,24 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public FeedbackResponseDto create(Long candidateId, FeedbackRequestDto feedbackRequestDto) {
         log.info("Создание отзыва для кандидата с Id: {}", candidateId);
+
         CandidateModel candidate = candidateRepo.findById(candidateId)
                 .orElseThrow(()->new EntityNotFoundException("Candidate", "id", candidateId));
+
         FeedbackModel feedback = feedbackMapper.fromRequest(feedbackRequestDto);
+
         HRModel hr = currentHRService.getCurrentHR();
+
         hr.addFeedback(feedback);
+
         candidate.addFeedback(feedback);
+
         candidateService.updateTotalRating(candidate.getId());
+
         FeedbackModel result = feedbackRepo.save(feedback);
+
         log.info("Отзыв для кандидата с Id: {} создан", candidateId);
+
         return feedbackMapper.toResponse(result);
     }
 

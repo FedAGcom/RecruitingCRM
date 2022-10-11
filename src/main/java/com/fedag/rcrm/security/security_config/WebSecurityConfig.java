@@ -63,6 +63,7 @@ public class WebSecurityConfig {
                 .antMatchers("/swagger-ui/index.html").permitAll()
                 .antMatchers("/v1/hrs/**").permitAll()
                 .antMatchers("/v1/test/**").permitAll()
+                .antMatchers("/v1/test/test").hasRole("USER")
                 .antMatchers("/v1/auth/**").permitAll()
                 .anyRequest().authenticated()
                 .and()

@@ -7,6 +7,7 @@ import com.fedag.rcrm.model.FeedbackModel;
 import com.fedag.rcrm.model.HRModel;
 import com.fedag.rcrm.model.dto.request.FeedbackRequestDto;
 import com.fedag.rcrm.model.dto.request.FeedbackRequestUpdateDto;
+import com.fedag.rcrm.model.dto.response.FeedbackResponseDto;
 import com.fedag.rcrm.repos.CandidateRepo;
 import com.fedag.rcrm.repos.FeedbackRepo;
 import com.fedag.rcrm.service.CandidateService;
@@ -40,6 +41,14 @@ public class FeedbackServiceImplTest {
     @Mock
     private FeedbackRepo feedbackRepo;
 
+    @Mock
+    private CandidateService candidateService;
+
+    @Mock
+    private CandidateRepo candidateRepo;
+
+    @Mock
+    CurrentHRService currentHRService;
 
     @InjectMocks
     private FeedbackServiceImpl feedbackService;
@@ -68,9 +77,12 @@ public class FeedbackServiceImplTest {
 
     @Test
     public void deleteFeedbackByValidId(){
-        when(feedbackRepo.findById(anyLong())).thenReturn(Optional.of(new FeedbackModel()));
+        FeedbackModel feedback = Mockito.mock(FeedbackModel.class);
+        when(feedbackRepo.findById(anyLong())).thenReturn(Optional.of(feedback));
+        when(feedback.getCandidate()).thenReturn(new CandidateModel());
         feedbackService.deleteById(anyLong());
         verify(feedbackRepo).deleteById(anyLong());
+        verify(candidateService).updateTotalRating(feedback.getCandidate().getId());
     }
 
     @Test
@@ -96,5 +108,25 @@ public class FeedbackServiceImplTest {
         assertThrows(EntityNotFoundException.class, ()->feedbackService.update(anyLong(), request));
     }
 
+    @Test
+    public void createFeedbackTestWithInvalidCandidateId() {
+        FeedbackRequestDto request = Mockito.mock(FeedbackRequestDto.class);
+        when(candidateRepo.findById(anyLong())).thenReturn(Optional.empty());
+        assertThrows(EntityNotFoundException.class, ()-> feedbackService.create(anyLong(), request));
+    }
 
+    @Test
+    public void createFeedbackTestWithValidCandidateId() {
+        FeedbackRequestDto request = Mockito.mock(FeedbackRequestDto.class);
+        CandidateModel candidate = Mockito.mock(CandidateModel.class);
+        HRModel hr = Mockito.mock(HRModel.class);
+        hr.setFeedbacks(new ArrayList<>());
+        candidate.setFeedbacks(new ArrayList<>());
+        when(currentHRService.getCurrentHR()).thenReturn(hr);
+        when(candidateRepo.findById(anyLong())).thenReturn(Optional.of(candidate));
+        when(feedbackMapper.fromRequest(request)).thenReturn(new FeedbackModel());
+        feedbackService.create(anyLong(), request);
+        verify(candidateService).updateTotalRating(anyLong());
+        verify(feedbackRepo).save(any(FeedbackModel.class));
+    }
 }

@@ -100,7 +100,8 @@ class VacancyServiceImplTest {
     @Test
     void findAll() {
         Pageable pageable = PageRequest.of(0,5);
-        when(vacancyRepo.findAll(pageable)).thenReturn(new PageImpl<>(Collections.singletonList(new VacancyModel())));
+        when(vacancyRepo.findAll(pageable))
+                .thenReturn(new PageImpl<>(Collections.singletonList(new VacancyModel())));
         vacancyService.findAll(pageable);
         verify(vacancyRepo).findAll(pageable);
     }

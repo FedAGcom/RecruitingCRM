@@ -32,7 +32,8 @@ public class CandidateServiceImpl implements CandidateService {
     @Override
     public CandidateResponseDto getCandidate(Long id) {
         log.info("Получение кандидата с Id: {}", id);
-        CandidateModel model = candidateRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("HR", "ID", id));
+        CandidateModel model = candidateRepo.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Candidate", "ID", id));
         CandidateResponseDto result = mapper.toCandidateResponseDto(model);
         log.info("Кандидат с Id: {} найден", id);
         return result;
